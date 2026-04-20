@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yusuf Göksu — Bilgisayar Mühendisi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+:root {
+  --bg: #080810; --bg2: #0f0f1a; --bg3: #16162a;
+  --border: rgba(255,255,255,0.06); --border2: rgba(255,255,255,0.12);
+  --text: #eeeeff; --muted: rgba(238,238,255,0.48); --dim: rgba(238,238,255,0.22);
+  --purple: #9b87f5; --purple-light: #c4b8ff; --purple-glow: rgba(155,135,245,0.15);
+  --teal: #4ecdc4; --coral: #ff6b6b; --amber: #ffd93d; --green: #6bcb77; --blue: #4d96ff;
+  --fd: 'Syne', sans-serif; --fb: 'DM Sans', sans-serif;
+  --r: 16px; --rsm: 10px;
+}
+body { background:var(--bg); color:var(--text); font-family:var(--fb); font-size:15px; line-height:1.7; overflow-x:hidden; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 48px; height:64px;
+  background:rgba(8,8,16,0.8); backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo { font-family:var(--fd); font-size:20px; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.nav-links { display:flex; align-items:center; gap:28px; }
+.nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover,.nav-links a.active { color:var(--text); }
+.nav-cta { background:var(--purple)!important; color:#08080f!important; padding:8px 20px; border-radius:100px; font-weight:600!important; }
+.burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
+.burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all 0.3s; }
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mob-menu { display:none; position:fixed; top:64px; left:0; right:0; background:rgba(8,8,16,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; flex-direction:column; padding:20px 24px 28px; gap:0; }
+.mob-menu.open { display:flex; }
+.mob-menu a { font-size:16px; font-weight:500; color:var(--muted); text-decoration:none; padding:13px 0; border-bottom:1px solid var(--border); transition:color 0.2s; }
+.mob-menu a:last-child { border:none; margin-top:8px; background:var(--purple); color:#08080f!important; padding:14px 0; border-radius:12px; text-align:center; font-weight:600; }
+.mob-menu a:hover { color:var(--text); }
+
+/* HERO */
+#hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:80px 48px 60px; overflow:hidden; }
+#hero-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
+#hero::after { content:''; position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse 90% 80% at 55% 50%, transparent 20%, rgba(8,8,16,0.55) 70%, rgba(8,8,16,0.92) 100%); pointer-events:none; }
+.hero-inner { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:60px; width:100%; max-width:1100px; margin:0 auto; }
+.hero-left { flex:1; max-width:560px; }
+
+.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(155,135,245,0.1); border:1px solid rgba(155,135,245,0.28); border-radius:100px; padding:6px 16px 6px 8px; font-size:12px; font-weight:500; color:var(--purple-light); margin-bottom:22px; animation:fadeUp 0.7s ease both; }
+.bdot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(107,203,119,0.25); animation:blink 2.4s ease infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero-name { font-family:var(--fd); font-size:clamp(42px,6.5vw,80px); font-weight:800; line-height:1.04; letter-spacing:-0.025em; animation:fadeUp 0.7s 0.1s ease both; }
+.hero-name .gr { background:linear-gradient(125deg,var(--purple-light) 0%,var(--teal) 55%,var(--blue) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.hero-sub { font-size:16px; color:var(--muted); margin-top:12px; font-weight:300; animation:fadeUp 0.7s 0.18s ease both; }
+.hero-desc { font-size:14px; color:var(--muted); margin-top:16px; line-height:1.85; max-width:480px; animation:fadeUp 0.7s 0.26s ease both; }
+
+.hstats { display:flex; gap:24px; margin-top:26px; flex-wrap:wrap; animation:fadeUp 0.7s 0.32s ease both; }
+.hs { border-left:2px solid rgba(155,135,245,0.35); padding-left:14px; }
+.hs-n { font-family:var(--fd); font-size:22px; font-weight:800; color:var(--purple-light); }
+.hs-l { font-size:11px; color:var(--dim); margin-top:1px; }
+
+.hero-actions { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; animation:fadeUp 0.7s 0.38s ease both; }
+.btn-p { display:inline-flex; align-items:center; gap:8px; background:var(--purple); color:#08080f; font-family:var(--fb); font-size:14px; font-weight:600; padding:13px 26px; border-radius:100px; border:none; cursor:pointer; text-decoration:none; transition:transform 0.2s, box-shadow 0.2s; }
+.btn-p:hover { transform:translateY(-2px); box-shadow:0 10px 36px rgba(155,135,245,0.38); }
+.btn-s { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--text); font-family:var(--fb); font-size:14px; font-weight:500; padding:13px 26px; border-radius:100px; border:1px solid var(--border2); cursor:pointer; text-decoration:none; transition:background 0.2s; }
+.btn-s:hover { background:var(--bg3); }
+
+/* HERO RIGHT */
+.hero-right { flex-shrink:0; animation:fadeUp 0.7s 0.2s ease both; }
+.av-scene { position:relative; width:320px; height:400px; }
+.orbit { position:absolute; inset:-70px; border:1px dashed rgba(155,135,245,0.15); border-radius:50%; animation:spin 18s linear infinite reverse; }
+.orbit-inner { position:absolute; inset:-35px; border:1px dashed rgba(78,205,196,0.1); border-radius:50%; animation:spin 12s linear infinite; }
+
+.av-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:160px; height:160px; }
+.av-ring { position:absolute; inset:-14px; border-radius:50%; background:conic-gradient(var(--purple),var(--teal),var(--blue),var(--coral),var(--purple)); animation:spin 7s linear infinite; }
+.av-ring-mask { position:absolute; inset:3px; background:var(--bg); border-radius:50%; }
+.av-img { position:absolute; inset:0; border-radius:50%; overflow:hidden; }
+.av-img img { width:100%; height:100%; object-fit:cover; object-position:center 10%; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.tc { position:absolute; display:flex; align-items:center; gap:7px; background:rgba(12,12,22,0.88); border:1px solid var(--border2); border-radius:10px; padding:8px 13px; font-size:11px; font-weight:600; white-space:nowrap; backdrop-filter:blur(12px); color:var(--text); animation:floatC 3.5s ease-in-out infinite; }
+.tc-ico { font-size:14px; }
+.tc1 { top:14px; left:-22px; animation-delay:0s; }
+.tc2 { top:14px; right:-14px; animation-delay:0.7s; }
+.tc3 { bottom:72px; right:-28px; animation-delay:1.4s; }
+.tc4 { bottom:40px; left:-32px; animation-delay:2.1s; }
+.tc5 { bottom:2px; left:50%; animation-delay:2.8s; animation-name:floatC5; }
+@keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+@keyframes floatC5 { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-7px)} }
+.ddot { position:absolute; border-radius:50%; animation:pdot 2.5s ease-in-out infinite; }
+.dd1 { width:8px;height:8px; background:var(--purple); top:6px;right:62px; animation-delay:0s; }
+.dd2 { width:5px;height:5px; background:var(--teal); bottom:62px;left:6px; animation-delay:1s; }
+.dd3 { width:6px;height:6px; background:var(--coral); top:92px;right:2px; animation-delay:1.8s; }
+@keyframes pdot { 0%,100%{opacity:0.8;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+
+/* TICKER */
+.ticker-wrap { position:relative; z-index:10; background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; padding:14px 0; }
+.ticker-track { display:flex; width:max-content; animation:tick 28s linear infinite; }
+.ti { display:flex; align-items:center; gap:10px; padding:0 30px; font-size:12px; font-weight:500; color:var(--muted); white-space:nowrap; }
+.tdot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SECTIONS */
+.pagesec { position:relative; z-index:10; padding:88px 48px; max-width:1100px; margin:0 auto; }
+.divider { border-top:1px solid var(--border); }
+.eyebrow { font-size:11px; font-weight:600; letter-spacing:0.12em; color:var(--purple); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+.eyebrow::before { content:''; width:22px; height:1px; background:var(--purple); }
+.sec-t { font-family:var(--fd); font-size:clamp(26px,3.5vw,42px); font-weight:700; line-height:1.15; letter-spacing:-0.01em; margin-bottom:44px; }
+
+/* PROJECTS */
+.pgrid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.pc { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:28px; position:relative; overflow:hidden; transition:border-color 0.3s,transform 0.3s; }
+.pc:hover { border-color:var(--border2); transform:translateY(-4px); }
+.pc::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; }
+.cp::before { background:linear-gradient(90deg,var(--purple),var(--teal)); }
+.ct::before { background:linear-gradient(90deg,var(--teal),var(--blue)); }
+.ca::before { background:linear-gradient(90deg,var(--amber),var(--coral)); }
+.pwide { grid-column:span 2; }
+.p-ico { width:46px;height:46px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px; }
+.p-name { font-family:var(--fd); font-size:17px; font-weight:700; margin-bottom:7px; }
+.p-desc { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:16px; }
+.p-tags { display:flex; flex-wrap:wrap; gap:5px; }
+.ptag { font-size:10px; padding:3px 9px; border-radius:100px; border:1px solid var(--border2); color:var(--muted); font-weight:500; }
+
+/* SKILLS */
+.sgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.sg { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:22px; transition:border-color 0.2s; }
+.sg:hover { border-color:var(--border2); }
+.sg-t { font-family:var(--fd); font-size:12px; font-weight:700; letter-spacing:0.05em; margin-bottom:13px; display:flex; align-items:center; gap:7px; }
+.sg-ico { font-size:15px; }
+.srow { display:flex; flex-wrap:wrap; gap:5px; }
+.sp { font-size:11px; padding:4px 11px; border-radius:100px; font-weight:500; }
+.sv{background:rgba(155,135,245,0.12);color:var(--purple-light);}
+.st{background:rgba(78,205,196,0.12);color:var(--teal);}
+.sc{background:rgba(255,107,107,0.12);color:var(--coral);}
+.sa{background:rgba(255,217,61,0.12);color:var(--amber);}
+.sb{background:rgba(77,150,255,0.12);color:var(--blue);}
+.sg2{background:rgba(107,203,119,0.12);color:var(--green);}
+
+/* ABOUT */
+.agrid { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:center; }
+.ab-img-box { display:flex; justify-content:center; }
+.ab-inner { width:230px; height:270px; border-radius:22px; overflow:hidden; border:1px solid var(--border2); }
+.ab-inner img { width:100%; height:100%; object-fit:cover; object-position:center 10%; }
+.ab-deco { position:absolute; bottom:-14px; right:-14px; width:70px; height:70px; border-radius:14px; background:linear-gradient(135deg,var(--purple),var(--teal)); opacity:0.32; z-index:-1; }
+.ab-float { position:absolute; bottom:-16px; left:-16px; background:var(--bg2); border:1px solid var(--border2); border-radius:11px; padding:10px 14px; display:flex; align-items:center; gap:9px; white-space:nowrap; }
+.ab-float-i { font-size:18px; }
+.ab-float-t { font-size:11px; font-weight:600; }
+.ab-float-s { font-size:10px; color:var(--muted); margin-top:1px; }
+.srow2 { display:flex; gap:24px; margin-top:26px; flex-wrap:wrap; }
+.st2 { border-left:2px solid rgba(155,135,245,0.3); padding-left:14px; }
+.sn { font-family:var(--fd); font-size:30px; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.sl { font-size:11px; color:var(--dim); margin-top:2px; }
+
+/* CERTS */
+.cl-list { display:flex; flex-direction:column; gap:10px; }
+.ci { display:flex; align-items:center; gap:15px; background:var(--bg2); border:1px solid var(--border); border-radius:var(--rsm); padding:16px 18px; transition:border-color 0.2s,transform 0.2s; }
+.ci:hover { border-color:var(--border2); transform:translateX(4px); }
+.ci-ico { width:38px;height:38px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
+.ci-n { font-size:13px; font-weight:500; }
+.ci-o { font-size:11px; color:var(--muted); margin-top:2px; }
+
+/* CONTACT */
+.contact-box { background:var(--bg2); border:1px solid var(--border); border-radius:22px; padding:52px 44px; max-width:580px; margin:0 auto; position:relative; overflow:hidden; text-align:center; }
+.contact-box::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--purple),var(--teal),var(--coral)); }
+.clinks { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:24px; }
+.clink { display:inline-flex; align-items:center; gap:7px; padding:11px 20px; border:1px solid var(--border2); border-radius:100px; font-size:13px; font-weight:500; color:var(--text); text-decoration:none; transition:background 0.2s,transform 0.2s; }
+.clink:hover { background:var(--bg3); transform:translateY(-2px); }
+
+footer { position:relative; z-index:10; text-align:center; padding:26px 48px; border-top:1px solid var(--border); font-size:12px; color:var(--dim); }
+
+/* ANIMATIONS */
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+.fi { opacity:0; transform:translateY(18px); transition:opacity 0.6s ease,transform 0.6s ease; }
+.fi.vis { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  .burger { display:flex; }
+  #hero { padding:80px 20px 50px; }
+  .hero-inner { flex-direction:column; align-items:center; text-align:center; gap:32px; }
+  .hero-left { max-width:100%; }
+  .hero-desc { max-width:100%; }
+  .hstats { justify-content:center; }
+  .hero-actions { justify-content:center; }
+  .av-scene { width:280px; height:330px; }
+  .av-center { width:140px; height:140px; }
+  .tc1 { top:10px; left:-10px; }
+  .tc2 { top:10px; right:-8px; }
+  .tc3 { bottom:60px; right:-18px; }
+  .tc4 { bottom:30px; left:-22px; }
+  .pagesec { padding:60px 20px; }
+  .pgrid { grid-template-columns:1fr; }
+  .pwide { grid-column:span 1; }
+  .sgrid { grid-template-columns:1fr 1fr; }
+  .agrid { grid-template-columns:1fr; }
+  .ab-img-box { margin-bottom:16px; }
+  .contact-box { padding:36px 20px; }
+  footer { padding:22px 20px; }
+}
+@media (max-width:480px) {
+  .hero-name { font-size:38px; }
+  .hstats { gap:14px; }
+  .sgrid { grid-template-columns:1fr; }
+  .srow2 { gap:14px; }
+  .btn-p,.btn-s { padding:12px 20px; font-size:13px; }
+  .tc { font-size:10px; padding:6px 10px; }
+  .tc3,.tc4 { display:none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">YG.</div>
+  <div class="nav-links">
+    <a href="#about">Hakkımda</a>
+    <a href="#projects">Projeler</a>
+    <a href="#skills">Beceriler</a>
+    <a href="#certs">Sertifikalar</a>
+    <a href="#contact" class="nav-cta">İletişim</a>
+  </div>
+  <button class="burger" id="burg" onclick="toggleMenu()" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="closeMenu()">Hakkımda</a>
+  <a href="#projects" onclick="closeMenu()">Projeler</a>
+  <a href="#skills" onclick="closeMenu()">Beceriler</a>
+  <a href="#certs" onclick="closeMenu()">Sertifikalar</a>
+  <a href="#contact" onclick="closeMenu()">İletişim</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge"><div class="bdot"></div>Staj için hazır · İnönü Üniversitesi 4. Sınıf</div>
+      <h1 class="hero-name">Yusuf<br><span class="gr">Göksu.</span></h1>
+      <p class="hero-sub">Full-Stack &amp; Mobil Geliştirici · Siber Güvenlik</p>
+      <p class="hero-desc">OOP prensiplerine hakim, Flutter ile mobil geliştirme deneyimli ve siber güvenlik sertifikalı bilgisayar mühendisi. Güvenli, mimari standartlara uygun kod yazmayı hedefliyorum.</p>
+      <div class="hstats">
+        <div class="hs"><div class="hs-n">2+</div><div class="hs-l">Büyük Proje</div></div>
+        <div class="hs"><div class="hs-n">4</div><div class="hs-l">Sertifika</div></div>
+        <div class="hs"><div class="hs-n">10+</div><div class="hs-l">Teknoloji</div></div>
+        <div class="hs"><div class="hs-n">A2</div><div class="hs-l">İngilizce</div></div>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-p">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 3 19 12 5 21 5 3"/></svg>
+          Projeleri Gör
+        </a>
+        <a href="mailto:yusufgks03@gmail.com" class="btn-s">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          İletişim Kur
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="av-scene">
+        <div class="orbit"></div>
+        <div class="orbit-inner"></div>
+        <div class="tc tc1"><span class="tc-ico">📱</span>Flutter</div>
+        <div class="tc tc2"><span class="tc-ico">🟩</span>Node.js</div>
+        <div class="tc tc3"><span class="tc-ico">🔐</span>JWT Auth</div>
+        <div class="tc tc4"><span class="tc-ico">🛡️</span>CEH</div>
+        <div class="tc tc5"><span class="tc-ico">🐍</span>Python</div>
+        <div class="ddot dd1"></div>
+        <div class="ddot dd2"></div>
+        <div class="ddot dd3"></div>
+        <div class="av-center">
+          <div class="av-ring"></div>
+          <div class="av-ring-mask"></div>
+          <div class="av-img">
+            <img src="avatar-code.png" alt="Yusuf Göksu" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>Python</div>
+    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Flutter & Dart</div>
+    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Node.js</div>
+    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>PostgreSQL</div>
+    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>MongoDB</div>
+    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Java & JavaFX</div>
+    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>React</div>
+    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Socket.IO</div>
+    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Docker</div>
+    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>FastAPI</div>
+    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>JWT Auth</div>
+    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Siber Güvenlik</div>
+    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>Python</div>
+    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Flutter & Dart</div>
+    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Node.js</div>
+    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>PostgreSQL</div>
+    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>MongoDB</div>
+    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Java & JavaFX</div>
+    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>React</div>
+    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Socket.IO</div>
+    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Docker</div>
+    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>FastAPI</div>
+    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>JWT Auth</div>
+    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Siber Güvenlik</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="divider"></div>
+<section class="pagesec" id="about">
+  <div class="agrid">
+    <div>
+      <div class="eyebrow">Hakkımda</div>
+      <h2 class="sec-t">Kod yazan,<br>güvenliği düşünen<br>mühendis.</h2>
+      <p style="color:var(--muted);line-height:1.85;font-size:14px;">İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Factory Method, Observer ve Facade gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim.</p>
+      <p style="color:var(--muted);line-height:1.85;font-size:14px;margin-top:12px;">Fırat Kalkınma Ajansı destekli sertifika programları sayesinde web güvenliği ve siber güvenlik alanlarında uzmanlaştım.</p>
+      <div class="srow2">
+        <div class="st2"><div class="sn">2+</div><div class="sl">Büyük Proje</div></div>
+        <div class="st2"><div class="sn">4</div><div class="sl">Sertifika</div></div>
+        <div class="st2"><div class="sn">10+</div><div class="sl">Teknoloji</div></div>
+      </div>
+    </div>
+    <div class="ab-img-box">
+      <div style="position:relative;display:inline-block;">
+        <div class="ab-inner fi">
+          <img src="avatar.png" alt="Yusuf Göksu" />
+        </div>
+        <div class="ab-deco"></div>
+        <div class="ab-float">
+          <div class="ab-float-i">🎓</div>
+          <div>
+            <div class="ab-float-t">İnönü Üniversitesi</div>
+            <div class="ab-float-s">Bilgisayar Müh. · 2022–</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<div class="divider"></div>
+<section class="pagesec" id="projects">
+  <div class="eyebrow">Projeler</div>
+  <h2 class="sec-t">Ne inşa ettim?</h2>
+  <div class="pgrid">
+    <div class="pc cp pwide fi">
+      <div class="p-ico" style="background:rgba(155,135,245,0.12);">🤖</div>
+      <div class="p-name">AI Destekli Mobil Dershane Uygulaması</div>
+      <p class="p-desc">Öğrenci, öğretmen ve veli rolleri için Flutter ile geliştirilmiş kapsamlı full-stack mobil uygulama. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor.</p>
+      <div class="p-tags">
+        <span class="ptag">Flutter</span><span class="ptag">Node.js / Express</span><span class="ptag">MongoDB</span>
+        <span class="ptag">Socket.IO</span><span class="ptag">Python / FastAPI</span><span class="ptag">Firebase FCM</span>
+        <span class="ptag">JWT Auth</span><span class="ptag">Railway Deploy</span><span class="ptag">REST API</span><span class="ptag">SMTP Mail</span>
+      </div>
+    </div>
+    <div class="pc ct fi">
+      <div class="p-ico" style="background:rgba(78,205,196,0.12);">🎫</div>
+      <div class="p-name">Müze Biletleme Sistemi</div>
+      <p class="p-desc">Java ve JavaFX ile geliştirilmiş masaüstü biletleme uygulaması. QR kod doğrulama, PDF bilet üretimi, Telegram bot ve e-posta entegrasyonu içeriyor.</p>
+      <div class="p-tags">
+        <span class="ptag">Java</span><span class="ptag">JavaFX / FXML</span><span class="ptag">PostgreSQL</span>
+        <span class="ptag">Hibernate ORM</span><span class="ptag">QR Code</span><span class="ptag">OpenPDF</span><span class="ptag">Telegram Bot</span>
+      </div>
+    </div>
+    <div class="pc ca fi">
+      <div class="p-ico" style="background:rgba(255,217,61,0.1);">🛡️</div>
+      <div class="p-name">Siber Güvenlik Araştırmaları</div>
+      <p class="p-desc">Zararlı yazılım analizi, tersine mühendislik, web güvenliği testleri ve etik hacker sertifika çalışmaları kapsamında yürütülen araştırma ve uygulama projeleri.</p>
+      <div class="p-tags">
+        <span class="ptag">Malware Analysis</span><span class="ptag">Reverse Engineering</span>
+        <span class="ptag">Web Security</span><span class="ptag">CEH</span><span class="ptag">Linux</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<div class="divider"></div>
+<section class="pagesec" id="skills">
+  <div class="eyebrow">Teknik Beceriler</div>
+  <h2 class="sec-t">Araç kutum.</h2>
+  <div class="sgrid">
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">💻</span>Programlama</div><div class="srow"><span class="sp sv">Python</span><span class="sp sv">Java</span><span class="sp sv">Dart</span><span class="sp sv">JavaScript</span></div></div>
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">📱</span>Mobil & Frontend</div><div class="srow"><span class="sp st">Flutter</span><span class="sp st">React</span><span class="sp st">HTML</span><span class="sp st">CSS</span></div></div>
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">⚙️</span>Backend</div><div class="srow"><span class="sp sc">Node.js</span><span class="sp sc">Express.js</span><span class="sp sc">FastAPI</span><span class="sp sc">REST API</span><span class="sp sc">JWT</span><span class="sp sc">Socket.IO</span></div></div>
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🗄️</span>Veritabanı</div><div class="srow"><span class="sp sb">PostgreSQL</span><span class="sp sb">MongoDB</span><span class="sp sb">SQL</span><span class="sp sb">Hibernate</span></div></div>
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🤖</span>Yapay Zeka & Veri</div><div class="srow"><span class="sp sa">ML</span><span class="sp sa">scikit-learn</span><span class="sp sa">Apriori</span></div></div>
+    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🛠️</span>Araçlar & DevOps</div><div class="srow"><span class="sp sg2">Git / GitHub</span><span class="sp sg2">Docker</span><span class="sp sg2">Linux</span><span class="sp sg2">Postman</span><span class="sp sg2">Railway</span></div></div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<div class="divider"></div>
+<section class="pagesec" id="certs">
+  <div class="eyebrow">Sertifikalar</div>
+  <h2 class="sec-t">Belgelerim.</h2>
+  <div class="cl-list">
+    <div class="ci fi"><div class="ci-ico" style="background:rgba(255,107,107,0.12);">🔬</div><div><div class="ci-n">Zararlı Yazılım Analizi ve Tersine Mühendislik</div><div class="ci-o">Siber Vatan Program · Fırat Kalkınma Ajansı</div></div></div>
+    <div class="ci fi"><div class="ci-ico" style="background:rgba(78,205,196,0.12);">🌐</div><div><div class="ci-n">Web Güvenliği Eğitimi</div><div class="ci-o">Fırat Kalkınma Ajansı</div></div></div>
+    <div class="ci fi"><div class="ci-ico" style="background:rgba(155,135,245,0.12);">🛡️</div><div><div class="ci-n">Siber Güvenlik Eğitimi</div><div class="ci-o">Fırat Kalkınma Ajansı & AB Projesi</div></div></div>
+    <div class="ci fi"><div class="ci-ico" style="background:rgba(255,217,61,0.12);">🎯</div><div><div class="ci-n">Certified Ethical Hacker (CEH) Eğitimi</div><div class="ci-o">BG-TEK & Siber Vatan</div></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="divider"></div>
+<section class="pagesec" id="contact">
+  <div class="contact-box fi">
+    <div class="eyebrow" style="justify-content:center;">İletişim</div>
+    <h2 class="sec-t" style="text-align:center;margin-bottom:10px;">Konuşalım mı?</h2>
+    <p style="color:var(--muted);font-size:13px;line-height:1.8;">Staj fırsatları, projeler veya teknoloji konuşmak için — her zaman açığım.</p>
+    <div class="clinks">
+      <a href="mailto:yusufgks03@gmail.com" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>E-posta</a>
+      <a href="https://github.com/Yusuf-Goksu" target="_blank" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</a>
+      <a href="https://www.linkedin.com/in/yusuf-göksu" target="_blank" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
+      <a href="tel:05451001487" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+90 545 100 14 87</a>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 Yusuf Göksu · Bilgisayar Mühendisi · İnönü Üniversitesi</p></footer>
+
+<script>
+/* ── HERO CANVAS ── */
+(function(){
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles, hexes, rains;
+  const COLORS = ['#9b87f5','#4ecdc4','#4d96ff','#c4b8ff','#6bcb77'];
+  const CODE = '01{}[]()<>=!;:/|&%#@$~*+-αβγδΩπ∞≈≠λφψ∂∑'.split('');
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    init();
+  }
+
+  function init() {
+    // hex grid
+    hexes = [];
+    const s = 40;
+    for (let r = 0; r < Math.ceil(H/(s*1.5))+2; r++) {
+      for (let c = 0; c < Math.ceil(W/(s*1.73))+2; c++) {
+        hexes.push({ x: c*s*1.73+(r%2?s*0.865:0)-s, y: r*s*1.5-s, s, phase: Math.random()*Math.PI*2 });
+      }
+    }
+
+    // particles
+    const n = Math.min(Math.floor(W*H/13000), 65);
+    particles = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      vx: (Math.random()-.5)*0.3, vy: (Math.random()-.5)*0.3,
+      r: Math.random()*1.6+0.5,
+      color: COLORS[Math.floor(Math.random()*COLORS.length)],
+      op: Math.random()*0.45+0.2
+    }));
+
+    // code rain columns
+    rains = [];
+    const cols = Math.floor(W/20);
+    for (let c = 0; c < cols; c++) {
+      if (Math.random() > 0.22) continue;
+      rains.push({
+        x: c*20+10, y: Math.random()*-H*2,
+        speed: Math.random()*0.55+0.18,
+        chars: Array.from({length: Math.floor(Math.random()*14)+6}, () => CODE[Math.floor(Math.random()*CODE.length)]),
+        color: COLORS[Math.floor(Math.random()*COLORS.length)],
+        alpha: Math.random()*0.055+0.02,
+        t: 0
+      });
+    }
+  }
+
+  function hexPath(x, y, s) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const a = Math.PI/3*i - Math.PI/6;
+      i ? ctx.lineTo(x+s*Math.cos(a), y+s*Math.sin(a)) : ctx.moveTo(x+s*Math.cos(a), y+s*Math.sin(a));
+    }
+    ctx.closePath();
+  }
+
+  let frame = 0;
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    frame++;
+
+    // hex grid
+    for (const h of hexes) {
+      const op = 0.022 + 0.012*Math.sin(h.phase + frame*0.007);
+      hexPath(h.x, h.y, h.s);
+      ctx.strokeStyle = `rgba(155,135,245,${op})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+
+    // code rain
+    ctx.font = '11px monospace';
+    for (const r of rains) {
+      r.y += r.speed;
+      if (r.y > H + r.chars.length*16) r.y = -r.chars.length*17;
+      r.t++;
+      if (r.t % 20 === 0) r.chars[Math.floor(Math.random()*r.chars.length)] = CODE[Math.floor(Math.random()*CODE.length)];
+      r.chars.forEach((ch, i) => {
+        const fade = (1 - i/r.chars.length) * r.alpha;
+        ctx.globalAlpha = Math.max(0, fade);
+        // parse hex color to rgba
+        const hex = r.color.replace('#','');
+        const rv = parseInt(hex.substring(0,2),16), gv = parseInt(hex.substring(2,4),16), bv = parseInt(hex.substring(4,6),16);
+        ctx.fillStyle = `rgba(${rv},${gv},${bv},1)`;
+        ctx.fillText(ch, r.x, r.y + i*16);
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    // particles + connections
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.globalAlpha = p.op;
+      ctx.fillStyle = p.color;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      for (let j = i+1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x-q.x, dy = p.y-q.y, d = Math.sqrt(dx*dx+dy*dy);
+        if (d < 115) {
+          ctx.beginPath();
+          ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
+          ctx.strokeStyle = p.color;
+          ctx.lineWidth = 0.35;
+          ctx.globalAlpha = (1-d/115)*0.16;
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+})();
+
+/* ── SCROLL FADE ── */
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i*65); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+/* ── ACTIVE NAV ── */
+const secs = document.querySelectorAll('[id]');
+const navAs = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+  navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur));
+});
+
+/* ── HAMBURGER ── */
+function toggleMenu() {
+  document.getElementById('burg').classList.toggle('open');
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('burg').classList.remove('open');
+  document.getElementById('mobMenu').classList.remove('open');
+}
+</script>
+</body>
+</html>
