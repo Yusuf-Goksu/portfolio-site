@@ -1,292 +1,428 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Yusuf Göksu — Bilgisayar Mühendisi</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Yusuf Göksu — Flutter & Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Familjen+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-:root {
-  --bg: #080810; --bg2: #0f0f1a; --bg3: #16162a;
-  --border: rgba(255,255,255,0.06); --border2: rgba(255,255,255,0.12);
-  --text: #eeeeff; --muted: rgba(238,238,255,0.48); --dim: rgba(238,238,255,0.22);
-  --purple: #9b87f5; --purple-light: #c4b8ff; --purple-glow: rgba(155,135,245,0.15);
-  --teal: #4ecdc4; --coral: #ff6b6b; --amber: #ffd93d; --green: #6bcb77; --blue: #4d96ff;
-  --fd: 'Syne', sans-serif; --fb: 'DM Sans', sans-serif;
-  --r: 16px; --rsm: 10px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+:root{
+  --bg:#04040a;
+  --surface:#0a0a14;
+  --surface2:#10101e;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.14);
+  --text:#f0f0ff;
+  --muted:rgba(240,240,255,0.5);
+  --dim:rgba(240,240,255,0.25);
+  --accent:#00e5ff;
+  --accent2:#7c4dff;
+  --accent-glow:rgba(0,229,255,0.18);
+  --warn:#ff6b35;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Familjen Grotesk',sans-serif;
+  --fm:'JetBrains Mono',monospace;
 }
-body { background:var(--bg); color:var(--text); font-family:var(--fb); font-size:15px; line-height:1.7; overflow-x:hidden; }
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.7;overflow-x:hidden;cursor:none;}
+
+/* CUSTOM CURSOR */
+#cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:difference;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,229,255,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.12s ease,width 0.25s,height 0.25s;}
+body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:18px;height:18px;}
 
 /* NAV */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 48px; height:64px;
-  background:rgba(8,8,16,0.8); backdrop-filter:blur(24px);
-  border-bottom:1px solid var(--border);
-}
-.nav-logo { font-family:var(--fd); font-size:20px; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.nav-links { display:flex; align-items:center; gap:28px; }
-.nav-links a { font-size:13px; font-weight:500; color:var(--muted); text-decoration:none; transition:color 0.2s; }
-.nav-links a:hover,.nav-links a.active { color:var(--text); }
-.nav-cta { background:var(--purple)!important; color:#08080f!important; padding:8px 20px; border-radius:100px; font-weight:600!important; }
-.burger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; background:none; border:none; }
-.burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all 0.3s; }
-.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;background:rgba(4,4,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--fd);font-size:26px;letter-spacing:0.05em;color:var(--accent);}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{font-family:var(--fm);font-size:11px;font-weight:400;color:var(--muted);text-decoration:none;letter-spacing:0.08em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.lang-toggle{display:flex;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;overflow:hidden;}
+.lang-btn{font-family:var(--fm);font-size:10px;padding:6px 12px;cursor:pointer;border:none;background:none;color:var(--muted);transition:all 0.2s;letter-spacing:0.1em;}
+.lang-btn.active{background:var(--accent);color:#04040a;font-weight:500;}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.burger span{display:block;width:20px;height:1.5px;background:var(--text);transition:all 0.3s;}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
 .burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mob-menu { display:none; position:fixed; top:64px; left:0; right:0; background:rgba(8,8,16,0.97); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); z-index:199; flex-direction:column; padding:20px 24px 28px; gap:0; }
-.mob-menu.open { display:flex; }
-.mob-menu a { font-size:16px; font-weight:500; color:var(--muted); text-decoration:none; padding:13px 0; border-bottom:1px solid var(--border); transition:color 0.2s; }
-.mob-menu a:last-child { border:none; margin-top:8px; background:var(--purple); color:#08080f!important; padding:14px 0; border-radius:12px; text-align:center; font-weight:600; }
-.mob-menu a:hover { color:var(--text); }
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.mob-menu{display:none;position:fixed;top:60px;left:0;right:0;background:rgba(4,4,10,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);z-index:499;flex-direction:column;padding:16px 24px 24px;gap:0;}
+.mob-menu.open{display:flex;}
+.mob-menu a{font-family:var(--fm);font-size:13px;color:var(--muted);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border);}
+.mob-menu a:last-child{border:none;margin-top:8px;background:var(--accent);color:#04040a;padding:12px 0;border-radius:8px;text-align:center;font-weight:500;}
 
 /* HERO */
-#hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:80px 48px 60px; overflow:hidden; }
-#hero-canvas { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0; }
-#hero::after { content:''; position:absolute; inset:0; z-index:1; background:radial-gradient(ellipse 90% 80% at 55% 50%, transparent 20%, rgba(8,8,16,0.55) 70%, rgba(8,8,16,0.92) 100%); pointer-events:none; }
-.hero-inner { position:relative; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:60px; width:100%; max-width:1100px; margin:0 auto; }
-.hero-left { flex:1; max-width:560px; }
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:80px 48px 60px;overflow:hidden;}
+.hero-noise{position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 60% 50%,black 0%,transparent 80%);}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;background:radial-gradient(circle,rgba(124,77,255,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-glow2{position:absolute;bottom:10%;left:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%);pointer-events:none;}
 
-.hero-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(155,135,245,0.1); border:1px solid rgba(155,135,245,0.28); border-radius:100px; padding:6px 16px 6px 8px; font-size:12px; font-weight:500; color:var(--purple-light); margin-bottom:22px; animation:fadeUp 0.7s ease both; }
-.bdot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 3px rgba(107,203,119,0.25); animation:blink 2.4s ease infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 420px;gap:0;align-items:center;width:100%;max-width:1200px;margin:0 auto;}
 
-.hero-name { font-family:var(--fd); font-size:clamp(42px,6.5vw,80px); font-weight:800; line-height:1.04; letter-spacing:-0.025em; animation:fadeUp 0.7s 0.1s ease both; }
-.hero-name .gr { background:linear-gradient(125deg,var(--purple-light) 0%,var(--teal) 55%,var(--blue) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.hero-sub { font-size:16px; color:var(--muted); margin-top:12px; font-weight:300; animation:fadeUp 0.7s 0.18s ease both; }
-.hero-desc { font-size:14px; color:var(--muted); margin-top:16px; line-height:1.85; max-width:480px; animation:fadeUp 0.7s 0.26s ease both; }
+.hero-left{padding-right:60px;}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;animation:fadeUp 0.6s ease both;}
+.h-line{width:32px;height:1px;background:var(--accent);}
+.h-tag{font-family:var(--fm);font-size:10px;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:#00e676;box-shadow:0 0 0 3px rgba(0,230,118,0.2);animation:pulse 2.5s ease infinite;margin-left:8px;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(0,230,118,0.2)}50%{box-shadow:0 0 0 6px rgba(0,230,118,0.05)}}
 
-.hstats { display:flex; gap:24px; margin-top:26px; flex-wrap:wrap; animation:fadeUp 0.7s 0.32s ease both; }
-.hs { border-left:2px solid rgba(155,135,245,0.35); padding-left:14px; }
-.hs-n { font-family:var(--fd); font-size:22px; font-weight:800; color:var(--purple-light); }
-.hs-l { font-size:11px; color:var(--dim); margin-top:1px; }
+.hero-title{font-family:var(--fd);font-size:clamp(72px,9vw,130px);line-height:0.92;letter-spacing:0.02em;animation:fadeUp 0.6s 0.1s ease both;}
+.hero-title .outline{-webkit-text-stroke:1.5px var(--text);color:transparent;}
+.hero-title .filled{color:var(--text);}
+.hero-title .accent-word{color:var(--accent);-webkit-text-stroke:0;}
 
-.hero-actions { display:flex; gap:12px; margin-top:28px; flex-wrap:wrap; animation:fadeUp 0.7s 0.38s ease both; }
-.btn-p { display:inline-flex; align-items:center; gap:8px; background:var(--purple); color:#08080f; font-family:var(--fb); font-size:14px; font-weight:600; padding:13px 26px; border-radius:100px; border:none; cursor:pointer; text-decoration:none; transition:transform 0.2s, box-shadow 0.2s; }
-.btn-p:hover { transform:translateY(-2px); box-shadow:0 10px 36px rgba(155,135,245,0.38); }
-.btn-s { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--text); font-family:var(--fb); font-size:14px; font-weight:500; padding:13px 26px; border-radius:100px; border:1px solid var(--border2); cursor:pointer; text-decoration:none; transition:background 0.2s; }
-.btn-s:hover { background:var(--bg3); }
+.hero-role{font-family:var(--fm);font-size:12px;letter-spacing:0.1em;color:var(--muted);margin-top:18px;animation:fadeUp 0.6s 0.18s ease both;}
+.hero-role span{color:var(--accent);}
 
-/* HERO RIGHT */
-.hero-right { flex-shrink:0; animation:fadeUp 0.7s 0.2s ease both; }
-.av-scene { position:relative; width:320px; height:400px; }
-.orbit { position:absolute; inset:-70px; border:1px dashed rgba(155,135,245,0.15); border-radius:50%; animation:spin 18s linear infinite reverse; }
-.orbit-inner { position:absolute; inset:-35px; border:1px dashed rgba(78,205,196,0.1); border-radius:50%; animation:spin 12s linear infinite; }
+.hero-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-top:20px;max-width:440px;animation:fadeUp 0.6s 0.26s ease both;}
 
-.av-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:160px; height:160px; }
-.av-ring { position:absolute; inset:-14px; border-radius:50%; background:conic-gradient(var(--purple),var(--teal),var(--blue),var(--coral),var(--purple)); animation:spin 7s linear infinite; }
-.av-ring-mask { position:absolute; inset:3px; background:var(--bg); border-radius:50%; }
-.av-img { position:absolute; inset:0; border-radius:50%; overflow:hidden; }
-.av-img img { width:100%; height:100%; object-fit:cover; object-position:center 10%; }
-@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.hero-cta{display:flex;gap:12px;margin-top:32px;animation:fadeUp 0.6s 0.34s ease both;}
+.btn-main{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#04040a;font-family:var(--fb);font-size:13px;font-weight:700;padding:14px 28px;border-radius:4px;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,229,255,0.3);}
+.btn-ghost{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--text);font-family:var(--fm);font-size:11px;font-weight:400;padding:14px 24px;border-radius:4px;border:1px solid var(--border2);cursor:pointer;text-decoration:none;letter-spacing:0.08em;transition:border-color 0.2s,background 0.2s;}
+.btn-ghost:hover{border-color:var(--accent);background:rgba(0,229,255,0.04);}
 
-.tc { position:absolute; display:flex; align-items:center; gap:7px; background:rgba(12,12,22,0.88); border:1px solid var(--border2); border-radius:10px; padding:8px 13px; font-size:11px; font-weight:600; white-space:nowrap; backdrop-filter:blur(12px); color:var(--text); animation:floatC 3.5s ease-in-out infinite; }
-.tc-ico { font-size:14px; }
-.tc1 { top:14px; left:-22px; animation-delay:0s; }
-.tc2 { top:14px; right:-14px; animation-delay:0.7s; }
-.tc3 { bottom:72px; right:-28px; animation-delay:1.4s; }
-.tc4 { bottom:40px; left:-32px; animation-delay:2.1s; }
-.tc5 { bottom:2px; left:50%; animation-delay:2.8s; animation-name:floatC5; }
-@keyframes floatC { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
-@keyframes floatC5 { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-7px)} }
-.ddot { position:absolute; border-radius:50%; animation:pdot 2.5s ease-in-out infinite; }
-.dd1 { width:8px;height:8px; background:var(--purple); top:6px;right:62px; animation-delay:0s; }
-.dd2 { width:5px;height:5px; background:var(--teal); bottom:62px;left:6px; animation-delay:1s; }
-.dd3 { width:6px;height:6px; background:var(--coral); top:92px;right:2px; animation-delay:1.8s; }
-@keyframes pdot { 0%,100%{opacity:0.8;transform:scale(1)} 50%{opacity:0.3;transform:scale(1.6)} }
+.hero-stats{display:flex;gap:0;margin-top:40px;border:1px solid var(--border);border-radius:8px;overflow:hidden;animation:fadeUp 0.6s 0.42s ease both;}
+.hs{flex:1;padding:16px 20px;border-right:1px solid var(--border);}
+.hs:last-child{border-right:none;}
+.hs-n{font-family:var(--fd);font-size:28px;color:var(--accent);line-height:1;}
+.hs-l{font-family:var(--fm);font-size:9px;letter-spacing:0.1em;color:var(--dim);margin-top:4px;text-transform:uppercase;}
+
+/* PHONE MOCKUP */
+.hero-right{display:flex;justify-content:center;align-items:center;animation:fadeUp 0.6s 0.2s ease both;}
+.phone-wrap{position:relative;}
+.phone{width:260px;height:520px;background:linear-gradient(145deg,#1a1a2e,#0f0f1e);border:2px solid rgba(255,255,255,0.12);border-radius:44px;position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05),inset 0 1px 0 rgba(255,255,255,0.08);}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:100px;height:28px;background:#04040a;border-radius:0 0 20px 20px;z-index:10;}
+.phone-screen{position:absolute;inset:0;overflow:hidden;border-radius:42px;}
+.app-bg{width:100%;height:100%;background:linear-gradient(160deg,#0d0d1f 0%,#060610 100%);}
+.app-topbar{position:absolute;top:34px;left:0;right:0;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;}
+.app-logo-t{font-family:var(--fd);font-size:18px;color:var(--accent);letter-spacing:0.05em;}
+.app-notif{width:24px;height:24px;background:rgba(0,229,255,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;}
+
+.app-hero-card{position:absolute;top:90px;left:12px;right:12px;background:linear-gradient(135deg,rgba(124,77,255,0.3),rgba(0,229,255,0.15));border:1px solid rgba(0,229,255,0.2);border-radius:18px;padding:16px;backdrop-filter:blur(10px);}
+.ahc-label{font-size:9px;color:var(--accent);font-family:var(--fm);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.ahc-title{font-family:var(--fd);font-size:20px;color:var(--text);line-height:1.1;}
+.ahc-sub{font-size:9px;color:var(--muted);margin-top:4px;font-family:var(--fm);}
+.ahc-bar{margin-top:10px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;}
+.ahc-bar-fill{height:100%;width:73%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px;}
+
+.app-cards{position:absolute;top:220px;left:12px;right:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.app-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px;}
+.ac-icon{font-size:16px;margin-bottom:4px;}
+.ac-t{font-size:8px;color:var(--muted);font-family:var(--fm);letter-spacing:0.06em;}
+.ac-n{font-family:var(--fd);font-size:16px;color:var(--text);}
+
+.app-chat{position:absolute;top:350px;left:12px;right:12px;}
+.chat-label{font-size:8px;color:var(--dim);font-family:var(--fm);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.chat-bubble{background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.15);border-radius:10px 10px 10px 2px;padding:7px 10px;font-size:9px;color:var(--muted);margin-bottom:4px;max-width:80%;}
+.chat-bubble.right{background:rgba(124,77,255,0.15);border-color:rgba(124,77,255,0.2);border-radius:10px 10px 2px 10px;margin-left:auto;font-family:var(--fm);}
+
+.app-navbar{position:absolute;bottom:0;left:0;right:0;height:60px;background:rgba(10,10,20,0.95);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-around;padding-bottom:6px;}
+.nav-ic{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.nav-ic-dot{width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,0.06);}
+.nav-ic-dot.active{background:rgba(0,229,255,0.2);}
+.nav-ic-label{font-size:6px;color:var(--dim);font-family:var(--fm);}
+.nav-ic-label.active{color:var(--accent);}
+
+/* phone floats */
+.ph-float{position:absolute;display:flex;align-items:center;gap:8px;background:rgba(10,10,20,0.9);border:1px solid var(--border2);border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;white-space:nowrap;backdrop-filter:blur(12px);animation:phFloat 3.5s ease-in-out infinite;}
+.ph-float-ico{font-size:16px;}
+.ph-f1{top:-20px;right:-70px;animation-delay:0s;}
+.ph-f2{bottom:60px;right:-80px;animation-delay:1.2s;}
+.ph-f3{bottom:20px;left:-90px;animation-delay:2.2s;}
+@keyframes phFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.phone-shadow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:180px;height:40px;background:radial-gradient(ellipse,rgba(0,229,255,0.2) 0%,transparent 70%);}
 
 /* TICKER */
-.ticker-wrap { position:relative; z-index:10; background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden; padding:14px 0; }
-.ticker-track { display:flex; width:max-content; animation:tick 28s linear infinite; }
-.ti { display:flex; align-items:center; gap:10px; padding:0 30px; font-size:12px; font-weight:500; color:var(--muted); white-space:nowrap; }
-.tdot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
-@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.ticker-wrap{background:var(--accent);overflow:hidden;padding:12px 0;position:relative;z-index:10;}
+.ticker-track{display:flex;width:max-content;animation:tick 25s linear infinite;}
+.ti{display:flex;align-items:center;gap:10px;padding:0 24px;font-family:var(--fd);font-size:14px;letter-spacing:0.06em;color:#04040a;white-space:nowrap;}
+.ti-sep{opacity:0.4;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* SECTIONS */
-.pagesec { position:relative; z-index:10; padding:88px 48px; max-width:1100px; margin:0 auto; }
-.divider { border-top:1px solid var(--border); }
-.eyebrow { font-size:11px; font-weight:600; letter-spacing:0.12em; color:var(--purple); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
-.eyebrow::before { content:''; width:22px; height:1px; background:var(--purple); }
-.sec-t { font-family:var(--fd); font-size:clamp(26px,3.5vw,42px); font-weight:700; line-height:1.15; letter-spacing:-0.01em; margin-bottom:44px; }
+section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
+.sec-divider{border-top:1px solid var(--border);margin:0 48px;}
+.eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+.sec-title{font-family:var(--fd);font-size:clamp(48px,6vw,80px);line-height:0.95;letter-spacing:0.02em;margin-bottom:60px;}
+.sec-title .outline{-webkit-text-stroke:1px rgba(240,240,255,0.3);color:transparent;}
 
-/* PROJECTS */
-.pgrid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-.pc { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:28px; position:relative; overflow:hidden; transition:border-color 0.3s,transform 0.3s; }
-.pc:hover { border-color:var(--border2); transform:translateY(-4px); }
-.pc::before { content:''; position:absolute; top:0;left:0;right:0; height:2px; }
-.cp::before { background:linear-gradient(90deg,var(--purple),var(--teal)); }
-.ct::before { background:linear-gradient(90deg,var(--teal),var(--blue)); }
-.ca::before { background:linear-gradient(90deg,var(--amber),var(--coral)); }
-.pwide { grid-column:span 2; }
-.p-ico { width:46px;height:46px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:21px; margin-bottom:16px; }
-.p-name { font-family:var(--fd); font-size:17px; font-weight:700; margin-bottom:7px; }
-.p-desc { font-size:13px; color:var(--muted); line-height:1.7; margin-bottom:16px; }
-.p-tags { display:flex; flex-wrap:wrap; gap:5px; }
-.ptag { font-size:10px; padding:3px 9px; border-radius:100px; border:1px solid var(--border2); color:var(--muted); font-weight:500; }
+/* FEATURED PROJECT */
+.feat-proj{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:20px;overflow:hidden;background:var(--surface);margin-bottom:20px;}
+.fp-left{padding:48px;display:flex;flex-direction:column;justify-content:space-between;}
+.fp-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:4px;padding:4px 12px;font-family:var(--fm);font-size:9px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;width:fit-content;}
+.fp-title{font-family:var(--fd);font-size:38px;line-height:1.05;letter-spacing:0.02em;margin-bottom:14px;}
+.fp-desc{font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:24px;}
+.fp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:28px;}
+.ftag{font-family:var(--fm);font-size:9px;padding:4px 10px;border-radius:3px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);color:var(--muted);letter-spacing:0.06em;}
+.fp-links{display:flex;gap:10px;}
+.fp-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--fm);font-size:10px;letter-spacing:0.08em;padding:10px 18px;border-radius:4px;text-decoration:none;transition:all 0.2s;}
+.fp-link.primary{background:var(--accent);color:#04040a;}
+.fp-link.primary:hover{box-shadow:0 8px 28px rgba(0,229,255,0.3);}
+.fp-link.sec{border:1px solid var(--border2);color:var(--muted);}
+.fp-link.sec:hover{border-color:var(--accent);color:var(--accent);}
+
+.fp-right{background:linear-gradient(135deg,rgba(124,77,255,0.08),rgba(0,229,255,0.04));border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:40px;position:relative;overflow:hidden;}
+.fp-right::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);background-size:30px 30px;}
+.fp-phones{display:flex;gap:-20px;align-items:flex-end;position:relative;z-index:1;}
+.mini-phone{width:110px;height:220px;background:linear-gradient(145deg,#1a1a2e,#0c0c1a);border:1.5px solid rgba(255,255,255,0.1);border-radius:22px;position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5);}
+.mini-phone.shift{transform:translateY(-20px) rotate(4deg);margin-left:-18px;}
+.mini-phone.shift2{transform:translateY(10px) rotate(-3deg);margin-left:-18px;}
+.mp-screen{position:absolute;inset:0;background:linear-gradient(160deg,#0d0d1f,#050510);border-radius:21px;overflow:hidden;}
+.mp-bar{height:18px;background:rgba(0,229,255,0.08);border-bottom:1px solid rgba(0,229,255,0.1);display:flex;align-items:center;padding:0 8px;}
+.mp-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);margin-right:2px;opacity:0.6;}
+.mp-content{padding:8px;}
+.mp-row{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;margin-bottom:5px;}
+.mp-row.short{width:60%;}
+.mp-row.accent{background:rgba(0,229,255,0.2);}
+.mp-card-mini{background:rgba(124,77,255,0.15);border-radius:6px;height:40px;margin-bottom:5px;border:1px solid rgba(124,77,255,0.2);}
+
+/* PROJECT GRID */
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.proj-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color 0.3s,transform 0.3s;position:relative;overflow:hidden;}
+.proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent-glow),transparent);opacity:0;transition:opacity 0.3s;}
+.proj-card:hover{border-color:rgba(0,229,255,0.3);transform:translateY(-4px);}
+.proj-card:hover::after{opacity:1;}
+.pc-ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;position:relative;z-index:1;}
+.pc-name{font-family:var(--fd);font-size:20px;letter-spacing:0.02em;margin-bottom:8px;position:relative;z-index:1;}
+.pc-desc{font-size:12px;color:var(--muted);line-height:1.75;margin-bottom:14px;position:relative;z-index:1;}
+.pc-tags{display:flex;flex-wrap:wrap;gap:4px;position:relative;z-index:1;}
+.pctag{font-family:var(--fm);font-size:9px;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--dim);}
+
+/* HOW I WORK */
+.flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.flow-step{padding:28px 24px;border-right:1px solid var(--border);position:relative;}
+.flow-step:last-child{border-right:none;}
+.fs-num{font-family:var(--fd);font-size:52px;color:rgba(0,229,255,0.08);line-height:1;margin-bottom:12px;}
+.fs-icon{font-size:22px;margin-bottom:10px;}
+.fs-title{font-family:var(--fd);font-size:18px;letter-spacing:0.02em;margin-bottom:8px;color:var(--text);}
+.fs-desc{font-size:11px;color:var(--muted);line-height:1.7;font-family:var(--fm);}
+.fs-arrow{position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--surface2);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1;font-size:10px;color:var(--accent);}
 
 /* SKILLS */
-.sgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-.sg { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r); padding:22px; transition:border-color 0.2s; }
-.sg:hover { border-color:var(--border2); }
-.sg-t { font-family:var(--fd); font-size:12px; font-weight:700; letter-spacing:0.05em; margin-bottom:13px; display:flex; align-items:center; gap:7px; }
-.sg-ico { font-size:15px; }
-.srow { display:flex; flex-wrap:wrap; gap:5px; }
-.sp { font-size:11px; padding:4px 11px; border-radius:100px; font-weight:500; }
-.sv{background:rgba(155,135,245,0.12);color:var(--purple-light);}
-.st{background:rgba(78,205,196,0.12);color:var(--teal);}
-.sc{background:rgba(255,107,107,0.12);color:var(--coral);}
-.sa{background:rgba(255,217,61,0.12);color:var(--amber);}
-.sb{background:rgba(77,150,255,0.12);color:var(--blue);}
-.sg2{background:rgba(107,203,119,0.12);color:var(--green);}
+.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.skill-group{margin-bottom:28px;}
+.sg-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.sg-icon{font-size:16px;}
+.sg-title{font-family:var(--fm);font-size:10px;letter-spacing:0.1em;color:var(--dim);text-transform:uppercase;}
+.skill-bars{display:flex;flex-direction:column;gap:10px;}
+.skill-bar{display:flex;align-items:center;gap:14px;}
+.sb-name{font-size:12px;font-weight:500;width:90px;flex-shrink:0;color:var(--muted);}
+.sb-track{flex:1;height:3px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;}
+.sb-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transform-origin:left;animation:barGrow 1s ease both;}
+@keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.sb-pct{font-family:var(--fm);font-size:9px;color:var(--dim);width:30px;text-align:right;}
+
+.skill-badges{display:flex;flex-wrap:wrap;gap:6px;}
+.sbadge{font-family:var(--fm);font-size:10px;padding:6px 14px;border-radius:4px;border:1px solid var(--border2);color:var(--muted);letter-spacing:0.05em;transition:all 0.2s;}
+.sbadge:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.04);}
 
 /* ABOUT */
-.agrid { display:grid; grid-template-columns:1fr 1fr; gap:52px; align-items:center; }
-.ab-img-box { display:flex; justify-content:center; }
-.ab-inner { width:230px; height:270px; border-radius:22px; overflow:hidden; border:1px solid var(--border2); }
-.ab-inner img { width:100%; height:100%; object-fit:cover; object-position:center 10%; }
-.ab-deco { position:absolute; bottom:-14px; right:-14px; width:70px; height:70px; border-radius:14px; background:linear-gradient(135deg,var(--purple),var(--teal)); opacity:0.32; z-index:-1; }
-.ab-float { position:absolute; bottom:-16px; left:-16px; background:var(--bg2); border:1px solid var(--border2); border-radius:11px; padding:10px 14px; display:flex; align-items:center; gap:9px; white-space:nowrap; }
-.ab-float-i { font-size:18px; }
-.ab-float-t { font-size:11px; font-weight:600; }
-.ab-float-s { font-size:10px; color:var(--muted); margin-top:1px; }
-.srow2 { display:flex; gap:24px; margin-top:26px; flex-wrap:wrap; }
-.st2 { border-left:2px solid rgba(155,135,245,0.3); padding-left:14px; }
-.sn { font-family:var(--fd); font-size:30px; font-weight:800; background:linear-gradient(135deg,var(--purple-light),var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.sl { font-size:11px; color:var(--dim); margin-top:2px; }
+.about-layout{display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:center;}
+.about-text p{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:16px;}
+.about-text p strong{color:var(--text);}
+.about-highlight{border-left:2px solid var(--accent);padding:16px 20px;background:rgba(0,229,255,0.04);border-radius:0 8px 8px 0;margin:24px 0;}
+.about-highlight p{margin:0;font-style:italic;}
+.ab-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;}
+.abs{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.abs-n{font-family:var(--fd);font-size:36px;color:var(--accent);line-height:1;}
+.abs-l{font-family:var(--fm);font-size:9px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+
+.about-right{display:flex;flex-direction:column;gap:12px;}
+.about-photo{width:100%;aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;}
+.about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.about-photo-overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(4,4,10,0.9));}
+.apo-name{font-family:var(--fd);font-size:22px;letter-spacing:0.04em;}
+.apo-role{font-family:var(--fm);font-size:9px;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-top:3px;}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.ac-ico2{font-size:20px;}
+.ac-t2{font-size:12px;font-weight:600;}
+.ac-s2{font-size:10px;color:var(--muted);font-family:var(--fm);margin-top:2px;}
 
 /* CERTS */
-.cl-list { display:flex; flex-direction:column; gap:10px; }
-.ci { display:flex; align-items:center; gap:15px; background:var(--bg2); border:1px solid var(--border); border-radius:var(--rsm); padding:16px 18px; transition:border-color 0.2s,transform 0.2s; }
-.ci:hover { border-color:var(--border2); transform:translateX(4px); }
-.ci-ico { width:38px;height:38px; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0; }
-.ci-n { font-size:13px; font-weight:500; }
-.ci-o { font-size:11px; color:var(--muted); margin-top:2px; }
+.certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.cert-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;align-items:flex-start;gap:16px;transition:all 0.25s;}
+.cert-item:hover{border-color:rgba(0,229,255,0.25);transform:translateX(4px);}
+.cert-ico{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.cert-name{font-size:13px;font-weight:600;margin-bottom:4px;}
+.cert-org{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
 
 /* CONTACT */
-.contact-box { background:var(--bg2); border:1px solid var(--border); border-radius:22px; padding:52px 44px; max-width:580px; margin:0 auto; position:relative; overflow:hidden; text-align:center; }
-.contact-box::before { content:''; position:absolute; top:0;left:0;right:0; height:3px; background:linear-gradient(90deg,var(--purple),var(--teal),var(--coral)); }
-.clinks { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:24px; }
-.clink { display:inline-flex; align-items:center; gap:7px; padding:11px 20px; border:1px solid var(--border2); border-radius:100px; font-size:13px; font-weight:500; color:var(--text); text-decoration:none; transition:background 0.2s,transform 0.2s; }
-.clink:hover { background:var(--bg3); transform:translateY(-2px); }
+.contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.contact-left .big-text{font-family:var(--fd);font-size:clamp(48px,7vw,90px);line-height:0.95;letter-spacing:0.02em;}
+.contact-left .big-text .outline{-webkit-text-stroke:1px rgba(240,240,255,0.2);color:transparent;}
+.contact-left p{font-size:13px;color:var(--muted);line-height:1.85;margin-top:20px;max-width:380px;}
+.contact-right{display:flex;flex-direction:column;gap:10px;padding-top:8px;}
+.c-link{display:flex;align-items:center;gap:16px;padding:18px 22px;background:var(--surface);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:all 0.25s;}
+.c-link:hover{border-color:rgba(0,229,255,0.3);transform:translateX(6px);background:rgba(0,229,255,0.04);}
+.cl-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.cl-text .cl-t{font-size:13px;font-weight:600;}
+.cl-text .cl-s{font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:2px;}
+.cl-arrow{margin-left:auto;font-size:16px;color:var(--dim);transition:color 0.2s,transform 0.2s;}
+.c-link:hover .cl-arrow{color:var(--accent);transform:translateX(3px);}
 
-footer { position:relative; z-index:10; text-align:center; padding:26px 48px; border-top:1px solid var(--border); font-size:12px; color:var(--dim); }
+.contact-email{margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
+.ce-label{font-family:var(--fm);font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
+.ce-addr{font-family:var(--fd);font-size:20px;color:var(--accent);letter-spacing:0.04em;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;}
+.ft-left{font-family:var(--fm);font-size:10px;color:var(--dim);letter-spacing:0.08em;}
+.ft-logo{font-family:var(--fd);font-size:20px;color:var(--accent);}
 
 /* ANIMATIONS */
-@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
-.fi { opacity:0; transform:translateY(18px); transition:opacity 0.6s ease,transform 0.6s ease; }
-.fi.vis { opacity:1; transform:translateY(0); }
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.fi{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fi.vis{opacity:1;transform:translateY(0);}
 
 /* RESPONSIVE */
-@media (max-width:900px) {
-  nav { padding:0 20px; }
-  .nav-links { display:none; }
-  .burger { display:flex; }
-  #hero { padding:80px 20px 50px; }
-  .hero-inner { flex-direction:column; align-items:center; text-align:center; gap:32px; }
-  .hero-left { max-width:100%; }
-  .hero-desc { max-width:100%; }
-  .hstats { justify-content:center; }
-  .hero-actions { justify-content:center; }
-  .av-scene { width:280px; height:330px; }
-  .av-center { width:140px; height:140px; }
-  .tc1 { top:10px; left:-10px; }
-  .tc2 { top:10px; right:-8px; }
-  .tc3 { bottom:60px; right:-18px; }
-  .tc4 { bottom:30px; left:-22px; }
-  .pagesec { padding:60px 20px; }
-  .pgrid { grid-template-columns:1fr; }
-  .pwide { grid-column:span 1; }
-  .sgrid { grid-template-columns:1fr 1fr; }
-  .agrid { grid-template-columns:1fr; }
-  .ab-img-box { margin-bottom:16px; }
-  .contact-box { padding:36px 20px; }
-  footer { padding:22px 20px; }
+@media(max-width:960px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  #hero{padding:80px 20px 50px;}
+  .hero-inner{grid-template-columns:1fr;gap:48px;}
+  .hero-left{padding-right:0;}
+  .hero-right{order:-1;}
+  .feat-proj{grid-template-columns:1fr;}
+  .fp-right{height:220px;}
+  .proj-grid{grid-template-columns:1fr;}
+  .flow-grid{grid-template-columns:1fr 1fr;gap:0;}
+  .flow-step:nth-child(2){border-right:none;}
+  .flow-step:nth-child(1),.flow-step:nth-child(2){border-bottom:1px solid var(--border);}
+  .fs-arrow{display:none;}
+  .skills-layout{grid-template-columns:1fr;}
+  .about-layout{grid-template-columns:1fr;}
+  .about-right{display:none;}
+  .certs-grid{grid-template-columns:1fr;}
+  .contact-layout{grid-template-columns:1fr;}
+  section.s{padding:60px 20px;}
+  .sec-divider{margin:0 20px;}
+  footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
 }
-@media (max-width:480px) {
-  .hero-name { font-size:38px; }
-  .hstats { gap:14px; }
-  .sgrid { grid-template-columns:1fr; }
-  .srow2 { gap:14px; }
-  .btn-p,.btn-s { padding:12px 20px; font-size:13px; }
-  .tc { font-size:10px; padding:6px 10px; }
-  .tc3,.tc4 { display:none; }
+@media(max-width:480px){
+  .hero-title{font-size:58px;}
+  .hero-stats{flex-wrap:wrap;}
+  .hs{border-right:none;border-bottom:1px solid var(--border);}
+  .hs:last-child{border-bottom:none;}
+  .flow-grid{grid-template-columns:1fr;}
+  .flow-step{border-right:none;border-bottom:1px solid var(--border);}
+  .flow-step:last-child{border-bottom:none;}
+  .ab-stats{grid-template-columns:1fr 1fr;}
 }
 </style>
 </head>
 <body>
 
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
 <nav>
   <div class="nav-logo">YG.</div>
   <div class="nav-links">
-    <a href="#about">Hakkımda</a>
-    <a href="#projects">Projeler</a>
-    <a href="#skills">Beceriler</a>
-    <a href="#certs">Sertifikalar</a>
-    <a href="#contact" class="nav-cta">İletişim</a>
+    <a href="#projects" data-tr="Projeler" data-en="Projects">Projeler</a>
+    <a href="#skills" data-tr="Beceriler" data-en="Skills">Beceriler</a>
+    <a href="#about" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+    <a href="#certs" data-tr="Sertifikalar" data-en="Certs">Sertifikalar</a>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('tr')">TR</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
   </div>
-  <button class="burger" id="burg" onclick="toggleMenu()" aria-label="Menü">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="burger" id="burg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="mob-menu" id="mobMenu">
-  <a href="#about" onclick="closeMenu()">Hakkımda</a>
-  <a href="#projects" onclick="closeMenu()">Projeler</a>
-  <a href="#skills" onclick="closeMenu()">Beceriler</a>
-  <a href="#certs" onclick="closeMenu()">Sertifikalar</a>
-  <a href="#contact" onclick="closeMenu()">İletişim</a>
+  <a href="#projects" onclick="closeMenu()" data-tr="Projeler" data-en="Projects">Projeler</a>
+  <a href="#skills" onclick="closeMenu()" data-tr="Beceriler" data-en="Skills">Beceriler</a>
+  <a href="#about" onclick="closeMenu()" data-tr="Hakkımda" data-en="About">Hakkımda</a>
+  <a href="#certs" onclick="closeMenu()" data-tr="Sertifikalar" data-en="Certs">Sertifikalar</a>
+  <a href="#contact" onclick="closeMenu()" data-tr="İletişim" data-en="Contact">İletişim</a>
 </div>
 
 <!-- HERO -->
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
+  <div class="hero-noise"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
   <div class="hero-inner">
     <div class="hero-left">
-      <div class="hero-badge"><div class="bdot"></div>Staj için hazır · İnönü Üniversitesi 4. Sınıf</div>
-      <h1 class="hero-name">Yusuf<br><span class="gr">Göksu.</span></h1>
-      <p class="hero-sub">Full-Stack &amp; Mobil Geliştirici · Siber Güvenlik</p>
-      <p class="hero-desc">OOP prensiplerine hakim, Flutter ile mobil geliştirme deneyimli ve siber güvenlik sertifikalı bilgisayar mühendisi. Güvenli, mimari standartlara uygun kod yazmayı hedefliyorum.</p>
-      <div class="hstats">
-        <div class="hs"><div class="hs-n">2+</div><div class="hs-l">Büyük Proje</div></div>
-        <div class="hs"><div class="hs-n">4</div><div class="hs-l">Sertifika</div></div>
-        <div class="hs"><div class="hs-n">10+</div><div class="hs-l">Teknoloji</div></div>
-        <div class="hs"><div class="hs-n">A2</div><div class="hs-l">İngilizce</div></div>
+      <div class="hero-eyebrow">
+        <div class="h-line"></div>
+        <span class="h-tag" data-tr="Staja Hazır · İnönü Üniversitesi" data-en="Available for Internship · Inonu University">Staja Hazır · İnönü Üniversitesi</span>
+        <div class="status-dot"></div>
       </div>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-p">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="5 3 19 12 5 21 5 3"/></svg>
-          Projeleri Gör
-        </a>
-        <a href="mailto:yusufgks03@gmail.com" class="btn-s">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          İletişim Kur
-        </a>
+      <h1 class="hero-title">
+        <span class="outline">YUSUF</span><br>
+        <span class="filled">GÖKSU</span>
+      </h1>
+      <p class="hero-role"><span data-tr="Flutter & Full-Stack Developer" data-en="Flutter & Full-Stack Developer">Flutter & Full-Stack Developer</span> <span style="color:var(--dim);margin:0 8px;">/</span> <span data-tr="Siber Güvenlik" data-en="Cybersecurity">Siber Güvenlik</span></p>
+      <p class="hero-desc" data-tr="OOP prensiplerine hakim, Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum." data-en="Computer engineer with strong OOP fundamentals, production-deployed Flutter apps, and CEH training. I build secure, architecturally sound software.">OOP prensiplerine hakim, Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-main" data-tr="Projeleri İncele →" data-en="View Projects →">Projeleri İncele →</a>
+        <a href="mailto:yusufgks03@gmail.com" class="btn-ghost" data-tr="İletişim Kur" data-en="Get in Touch">İletişim Kur</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="hs-n">2+</div><div class="hs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
+        <div class="hs"><div class="hs-n">4</div><div class="hs-l" data-tr="Sertifika" data-en="Certificates">Sertifika</div></div>
+        <div class="hs"><div class="hs-n">10+</div><div class="hs-l" data-tr="Teknoloji" data-en="Technologies">Teknoloji</div></div>
+        <div class="hs"><div class="hs-n">4.</div><div class="hs-l" data-tr="Sınıf" data-en="Year">Sınıf</div></div>
       </div>
     </div>
 
     <div class="hero-right">
-      <div class="av-scene">
-        <div class="orbit"></div>
-        <div class="orbit-inner"></div>
-        <div class="tc tc1"><span class="tc-ico">📱</span>Flutter</div>
-        <div class="tc tc2"><span class="tc-ico">🟩</span>Node.js</div>
-        <div class="tc tc3"><span class="tc-ico">🔐</span>JWT Auth</div>
-        <div class="tc tc4"><span class="tc-ico">🛡️</span>CEH</div>
-        <div class="tc tc5"><span class="tc-ico">🐍</span>Python</div>
-        <div class="ddot dd1"></div>
-        <div class="ddot dd2"></div>
-        <div class="ddot dd3"></div>
-        <div class="av-center">
-          <div class="av-ring"></div>
-          <div class="av-ring-mask"></div>
-          <div class="av-img">
-            <img src="avatar-code.png" alt="Yusuf Göksu" />
+      <div class="phone-wrap">
+        <!-- Phone mockup -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="app-bg"></div>
+            <div class="app-topbar">
+              <div class="app-logo-t">DERSHANE</div>
+              <div class="app-notif">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#00e5ff" stroke-width="2.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              </div>
+            </div>
+            <div class="app-hero-card">
+              <div class="ahc-label">AI ANALİZ</div>
+              <div class="ahc-title">Deneme<br>Sonuçları</div>
+              <div class="ahc-sub">TYT • 47/120 doğru · +8 bu hafta</div>
+              <div class="ahc-bar"><div class="ahc-bar-fill"></div></div>
+            </div>
+            <div class="app-cards">
+              <div class="app-card">
+                <div class="ac-icon">📚</div>
+                <div class="ac-t">DERSLER</div>
+                <div class="ac-n">12</div>
+              </div>
+              <div class="app-card">
+                <div class="ac-icon">✅</div>
+                <div class="ac-t">GÖREV</div>
+                <div class="ac-n">5</div>
+              </div>
+            </div>
+            <div class="app-chat">
+              <div class="chat-label">CANLI MESAJ</div>
+              <div class="chat-bubble">Matematik ödevi ne zaman?</div>
+              <div class="chat-bubble right">Yarın 14:00'da 🎯</div>
+            </div>
+            <div class="app-navbar">
+              <div class="nav-ic"><div class="nav-ic-dot active"></div><div class="nav-ic-label active">Ana</div></div>
+              <div class="nav-ic"><div class="nav-ic-dot"></div><div class="nav-ic-label">Dersler</div></div>
+              <div class="nav-ic"><div class="nav-ic-dot"></div><div class="nav-ic-label">Mesaj</div></div>
+              <div class="nav-ic"><div class="nav-ic-dot"></div><div class="nav-ic-label">Profil</div></div>
+            </div>
           </div>
         </div>
+        <!-- Float badges -->
+        <div class="ph-float ph-f1"><span class="ph-float-ico">📱</span>Flutter 3.x</div>
+        <div class="ph-float ph-f2"><span class="ph-float-ico">🟢</span>Railway Live</div>
+        <div class="ph-float ph-f3"><span class="ph-float-ico">🤖</span>AI Powered</div>
+        <div class="phone-shadow"></div>
       </div>
     </div>
   </div>
@@ -294,299 +430,394 @@ footer { position:relative; z-index:10; text-align:center; padding:26px 48px; bo
 
 <!-- TICKER -->
 <div class="ticker-wrap">
-  <div class="ticker-track">
-    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>Python</div>
-    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Flutter & Dart</div>
-    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Node.js</div>
-    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>PostgreSQL</div>
-    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>MongoDB</div>
-    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Java & JavaFX</div>
-    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>React</div>
-    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Socket.IO</div>
-    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Docker</div>
-    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>FastAPI</div>
-    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>JWT Auth</div>
-    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Siber Güvenlik</div>
-    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>Python</div>
-    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Flutter & Dart</div>
-    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Node.js</div>
-    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>PostgreSQL</div>
-    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>MongoDB</div>
-    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Java & JavaFX</div>
-    <div class="ti"><div class="tdot" style="background:var(--purple)"></div>React</div>
-    <div class="ti"><div class="tdot" style="background:var(--teal)"></div>Socket.IO</div>
-    <div class="ti"><div class="tdot" style="background:var(--coral)"></div>Docker</div>
-    <div class="ti"><div class="tdot" style="background:var(--amber)"></div>FastAPI</div>
-    <div class="ti"><div class="tdot" style="background:var(--blue)"></div>JWT Auth</div>
-    <div class="ti"><div class="tdot" style="background:var(--green)"></div>Siber Güvenlik</div>
+  <div class="ticker-track" id="ticker">
+    <div class="ti">FLUTTER</div><div class="ti ti-sep">◆</div>
+    <div class="ti">NODE.JS</div><div class="ti ti-sep">◆</div>
+    <div class="ti">PYTHON</div><div class="ti ti-sep">◆</div>
+    <div class="ti">MONGODB</div><div class="ti ti-sep">◆</div>
+    <div class="ti">SOCKET.IO</div><div class="ti ti-sep">◆</div>
+    <div class="ti">FASTAPI</div><div class="ti ti-sep">◆</div>
+    <div class="ti">JWT AUTH</div><div class="ti ti-sep">◆</div>
+    <div class="ti">DOCKER</div><div class="ti ti-sep">◆</div>
+    <div class="ti">POSTGRESQL</div><div class="ti ti-sep">◆</div>
+    <div class="ti">CEH</div><div class="ti ti-sep">◆</div>
+    <div class="ti">FLUTTER</div><div class="ti ti-sep">◆</div>
+    <div class="ti">NODE.JS</div><div class="ti ti-sep">◆</div>
+    <div class="ti">PYTHON</div><div class="ti ti-sep">◆</div>
+    <div class="ti">MONGODB</div><div class="ti ti-sep">◆</div>
+    <div class="ti">SOCKET.IO</div><div class="ti ti-sep">◆</div>
+    <div class="ti">FASTAPI</div><div class="ti ti-sep">◆</div>
+    <div class="ti">JWT AUTH</div><div class="ti ti-sep">◆</div>
+    <div class="ti">DOCKER</div><div class="ti ti-sep">◆</div>
+    <div class="ti">POSTGRESQL</div><div class="ti ti-sep">◆</div>
+    <div class="ti">CEH</div><div class="ti ti-sep">◆</div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<div class="divider"></div>
-<section class="pagesec" id="about">
-  <div class="agrid">
-    <div>
-      <div class="eyebrow">Hakkımda</div>
-      <h2 class="sec-t">Kod yazan,<br>güvenliği düşünen<br>mühendis.</h2>
-      <p style="color:var(--muted);line-height:1.85;font-size:14px;">İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. Factory Method, Observer ve Facade gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim.</p>
-      <p style="color:var(--muted);line-height:1.85;font-size:14px;margin-top:12px;">Fırat Kalkınma Ajansı destekli sertifika programları sayesinde web güvenliği ve siber güvenlik alanlarında uzmanlaştım.</p>
-      <div class="srow2">
-        <div class="st2"><div class="sn">2+</div><div class="sl">Büyük Proje</div></div>
-        <div class="st2"><div class="sn">4</div><div class="sl">Sertifika</div></div>
-        <div class="st2"><div class="sn">10+</div><div class="sl">Teknoloji</div></div>
+<!-- PROJECTS -->
+<div class="sec-divider"></div>
+<section class="s" id="projects">
+  <div class="eyebrow" data-tr="Projeler" data-en="Projects">Projeler</div>
+  <h2 class="sec-title">
+    <span class="outline" data-tr="NE" data-en="WHAT">NE</span><br>
+    <span data-tr="İNŞA ETTİM" data-en="I BUILT">İNŞA ETTİM</span>
+  </h2>
+
+  <!-- Featured -->
+  <div class="feat-proj fi">
+    <div class="fp-left">
+      <div>
+        <div class="fp-badge" data-tr="✦ Öne Çıkan Proje" data-en="✦ Featured Project">✦ Öne Çıkan Proje</div>
+        <div class="fp-title" data-tr="AI Destekli<br>Dershane Uygulaması" data-en="AI-Powered<br>Tutoring App">AI Destekli<br>Dershane Uygulaması</div>
+        <p class="fp-desc" data-tr="Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor. Factory Method & Observer tasarım kalıpları uygulandı." data-en="Full-stack mobile platform for student, teacher and parent roles. Includes real-time messaging, AI-powered test analysis, push notifications, and production deployment on Railway. Factory Method & Observer design patterns applied.">Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor. Factory Method & Observer tasarım kalıpları uygulandı.</p>
+        <div class="fp-tags">
+          <span class="ftag">Flutter</span><span class="ftag">Node.js</span><span class="ftag">MongoDB</span>
+          <span class="ftag">Socket.IO</span><span class="ftag">Python / FastAPI</span><span class="ftag">Firebase FCM</span>
+          <span class="ftag">JWT Auth</span><span class="ftag">Railway</span><span class="ftag">REST API</span>
+        </div>
+      </div>
+      <div class="fp-links">
+        <a href="https://github.com/Yusuf-Goksu" target="_blank" class="fp-link primary" data-tr="GitHub'da Gör →" data-en="View on GitHub →">GitHub'da Gör →</a>
+        <a href="#contact" class="fp-link sec" data-tr="Demo İste" data-en="Request Demo">Demo İste</a>
       </div>
     </div>
-    <div class="ab-img-box">
-      <div style="position:relative;display:inline-block;">
-        <div class="ab-inner fi">
-          <img src="avatar.png" alt="Yusuf Göksu" />
+    <div class="fp-right">
+      <div class="fp-phones">
+        <div class="mini-phone">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-card-mini"></div>
+              <div class="mp-row accent"></div>
+              <div class="mp-row"></div>
+              <div class="mp-row short"></div>
+              <div class="mp-row"></div>
+            </div>
+          </div>
         </div>
-        <div class="ab-deco"></div>
-        <div class="ab-float">
-          <div class="ab-float-i">🎓</div>
-          <div>
-            <div class="ab-float-t">İnönü Üniversitesi</div>
-            <div class="ab-float-s">Bilgisayar Müh. · 2022–</div>
+        <div class="mini-phone shift">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-row accent"></div>
+              <div class="mp-row short"></div>
+              <div class="mp-card-mini" style="background:rgba(0,229,255,0.1);border-color:rgba(0,229,255,0.2);"></div>
+              <div class="mp-row"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-phone shift2">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-row"></div>
+              <div class="mp-row accent"></div>
+              <div class="mp-row short"></div>
+              <div class="mp-card-mini" style="height:60px;background:rgba(124,77,255,0.1);"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Other projects -->
+  <div class="proj-grid" style="margin-top:16px;">
+    <div class="proj-card fi">
+      <div class="pc-ico" style="background:rgba(0,229,255,0.08);">🎫</div>
+      <div class="pc-name" data-tr="Müze Biletleme Sistemi" data-en="Museum Ticketing System">Müze Biletleme Sistemi</div>
+      <p class="pc-desc" data-tr="Java + JavaFX masaüstü uygulaması. QR kod doğrulama, PDF bilet üretimi, Telegram bot ve e-posta entegrasyonu." data-en="Java + JavaFX desktop app. QR code validation, PDF ticket generation, Telegram bot and email integration.">Java + JavaFX masaüstü uygulaması. QR kod doğrulama, PDF bilet üretimi, Telegram bot ve e-posta entegrasyonu.</p>
+      <div class="pc-tags">
+        <span class="pctag">Java</span><span class="pctag">JavaFX</span><span class="pctag">PostgreSQL</span>
+        <span class="pctag">Hibernate</span><span class="pctag">QR Code</span><span class="pctag">OpenPDF</span>
+      </div>
+    </div>
+    <div class="proj-card fi">
+      <div class="pc-ico" style="background:rgba(255,107,53,0.08);">🛡️</div>
+      <div class="pc-name" data-tr="Siber Güvenlik Araştırmaları" data-en="Cybersecurity Research">Siber Güvenlik Araştırmaları</div>
+      <p class="pc-desc" data-tr="Zararlı yazılım analizi, tersine mühendislik, web güvenliği testleri ve etik hacker sertifika çalışmaları." data-en="Malware analysis, reverse engineering, web security testing and ethical hacking certification studies.">Zararlı yazılım analizi, tersine mühendislik, web güvenliği testleri ve etik hacker sertifika çalışmaları.</p>
+      <div class="pc-tags">
+        <span class="pctag">Malware Analysis</span><span class="pctag">Reverse Eng.</span>
+        <span class="pctag">Web Security</span><span class="pctag">CEH</span><span class="pctag">Linux</span>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- PROJECTS -->
-<div class="divider"></div>
-<section class="pagesec" id="projects">
-  <div class="eyebrow">Projeler</div>
-  <h2 class="sec-t">Ne inşa ettim?</h2>
-  <div class="pgrid">
-    <div class="pc cp pwide fi">
-      <div class="p-ico" style="background:rgba(155,135,245,0.12);">🤖</div>
-      <div class="p-name">AI Destekli Mobil Dershane Uygulaması</div>
-      <p class="p-desc">Öğrenci, öğretmen ve veli rolleri için Flutter ile geliştirilmiş kapsamlı full-stack mobil uygulama. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor.</p>
-      <div class="p-tags">
-        <span class="ptag">Flutter</span><span class="ptag">Node.js / Express</span><span class="ptag">MongoDB</span>
-        <span class="ptag">Socket.IO</span><span class="ptag">Python / FastAPI</span><span class="ptag">Firebase FCM</span>
-        <span class="ptag">JWT Auth</span><span class="ptag">Railway Deploy</span><span class="ptag">REST API</span><span class="ptag">SMTP Mail</span>
-      </div>
+<!-- HOW I WORK -->
+<div class="sec-divider"></div>
+<section class="s">
+  <div class="eyebrow" data-tr="Süreç" data-en="Process">Süreç</div>
+  <h2 class="sec-title" style="margin-bottom:40px;">
+    <span data-tr="NASIL" data-en="HOW I">NASIL</span><br>
+    <span class="outline" data-tr="ÇALIŞIRIM" data-en="WORK">ÇALIŞIRIM</span>
+  </h2>
+  <div class="flow-grid fi">
+    <div class="flow-step">
+      <div class="fs-num">01</div>
+      <div class="fs-icon">📱</div>
+      <div class="fs-title" data-tr="Flutter UI" data-en="Flutter UI">Flutter UI</div>
+      <p class="fs-desc" data-tr="Dart ile tip güvenli, widget tabanlı, responsive arayüzler." data-en="Type-safe, widget-based, responsive UIs with Dart.">Dart ile tip güvenli, widget tabanlı, responsive arayüzler.</p>
+      <div class="fs-arrow">→</div>
     </div>
-    <div class="pc ct fi">
-      <div class="p-ico" style="background:rgba(78,205,196,0.12);">🎫</div>
-      <div class="p-name">Müze Biletleme Sistemi</div>
-      <p class="p-desc">Java ve JavaFX ile geliştirilmiş masaüstü biletleme uygulaması. QR kod doğrulama, PDF bilet üretimi, Telegram bot ve e-posta entegrasyonu içeriyor.</p>
-      <div class="p-tags">
-        <span class="ptag">Java</span><span class="ptag">JavaFX / FXML</span><span class="ptag">PostgreSQL</span>
-        <span class="ptag">Hibernate ORM</span><span class="ptag">QR Code</span><span class="ptag">OpenPDF</span><span class="ptag">Telegram Bot</span>
-      </div>
+    <div class="flow-step">
+      <div class="fs-num">02</div>
+      <div class="fs-icon">⚙️</div>
+      <div class="fs-title" data-tr="Node.js API" data-en="Node.js API">Node.js API</div>
+      <p class="fs-desc" data-tr="JWT auth, Socket.IO, REST endpoints. Temiz mimari, design pattern'ler." data-en="JWT auth, Socket.IO, REST endpoints. Clean architecture, design patterns.">JWT auth, Socket.IO, REST endpoints. Temiz mimari, design pattern'ler.</p>
+      <div class="fs-arrow">→</div>
     </div>
-    <div class="pc ca fi">
-      <div class="p-ico" style="background:rgba(255,217,61,0.1);">🛡️</div>
-      <div class="p-name">Siber Güvenlik Araştırmaları</div>
-      <p class="p-desc">Zararlı yazılım analizi, tersine mühendislik, web güvenliği testleri ve etik hacker sertifika çalışmaları kapsamında yürütülen araştırma ve uygulama projeleri.</p>
-      <div class="p-tags">
-        <span class="ptag">Malware Analysis</span><span class="ptag">Reverse Engineering</span>
-        <span class="ptag">Web Security</span><span class="ptag">CEH</span><span class="ptag">Linux</span>
-      </div>
+    <div class="flow-step">
+      <div class="fs-num">03</div>
+      <div class="fs-icon">🤖</div>
+      <div class="fs-title" data-tr="AI Katmanı" data-en="AI Layer">AI Katmanı</div>
+      <p class="fs-desc" data-tr="Python / FastAPI ile ML entegrasyonu. scikit-learn, Apriori algoritmaları." data-en="ML integration with Python / FastAPI. scikit-learn, Apriori algorithms.">Python / FastAPI ile ML entegrasyonu. scikit-learn, Apriori algoritmaları.</p>
+      <div class="fs-arrow">→</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">04</div>
+      <div class="fs-icon">🚀</div>
+      <div class="fs-title" data-tr="Deploy" data-en="Deploy">Deploy</div>
+      <p class="fs-desc" data-tr="Docker + Railway ile production. CI/CD, environment yönetimi." data-en="Production with Docker + Railway. CI/CD, environment management.">Docker + Railway ile production. CI/CD, environment yönetimi.</p>
     </div>
   </div>
 </section>
 
 <!-- SKILLS -->
-<div class="divider"></div>
-<section class="pagesec" id="skills">
-  <div class="eyebrow">Teknik Beceriler</div>
-  <h2 class="sec-t">Araç kutum.</h2>
-  <div class="sgrid">
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">💻</span>Programlama</div><div class="srow"><span class="sp sv">Python</span><span class="sp sv">Java</span><span class="sp sv">Dart</span><span class="sp sv">JavaScript</span></div></div>
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">📱</span>Mobil & Frontend</div><div class="srow"><span class="sp st">Flutter</span><span class="sp st">React</span><span class="sp st">HTML</span><span class="sp st">CSS</span></div></div>
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">⚙️</span>Backend</div><div class="srow"><span class="sp sc">Node.js</span><span class="sp sc">Express.js</span><span class="sp sc">FastAPI</span><span class="sp sc">REST API</span><span class="sp sc">JWT</span><span class="sp sc">Socket.IO</span></div></div>
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🗄️</span>Veritabanı</div><div class="srow"><span class="sp sb">PostgreSQL</span><span class="sp sb">MongoDB</span><span class="sp sb">SQL</span><span class="sp sb">Hibernate</span></div></div>
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🤖</span>Yapay Zeka & Veri</div><div class="srow"><span class="sp sa">ML</span><span class="sp sa">scikit-learn</span><span class="sp sa">Apriori</span></div></div>
-    <div class="sg fi"><div class="sg-t"><span class="sg-ico">🛠️</span>Araçlar & DevOps</div><div class="srow"><span class="sp sg2">Git / GitHub</span><span class="sp sg2">Docker</span><span class="sp sg2">Linux</span><span class="sp sg2">Postman</span><span class="sp sg2">Railway</span></div></div>
-  </div>
-</section>
-
-<!-- CERTS -->
-<div class="divider"></div>
-<section class="pagesec" id="certs">
-  <div class="eyebrow">Sertifikalar</div>
-  <h2 class="sec-t">Belgelerim.</h2>
-  <div class="cl-list">
-    <div class="ci fi"><div class="ci-ico" style="background:rgba(255,107,107,0.12);">🔬</div><div><div class="ci-n">Zararlı Yazılım Analizi ve Tersine Mühendislik</div><div class="ci-o">Siber Vatan Program · Fırat Kalkınma Ajansı</div></div></div>
-    <div class="ci fi"><div class="ci-ico" style="background:rgba(78,205,196,0.12);">🌐</div><div><div class="ci-n">Web Güvenliği Eğitimi</div><div class="ci-o">Fırat Kalkınma Ajansı</div></div></div>
-    <div class="ci fi"><div class="ci-ico" style="background:rgba(155,135,245,0.12);">🛡️</div><div><div class="ci-n">Siber Güvenlik Eğitimi</div><div class="ci-o">Fırat Kalkınma Ajansı & AB Projesi</div></div></div>
-    <div class="ci fi"><div class="ci-ico" style="background:rgba(255,217,61,0.12);">🎯</div><div><div class="ci-n">Certified Ethical Hacker (CEH) Eğitimi</div><div class="ci-o">BG-TEK & Siber Vatan</div></div></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<div class="divider"></div>
-<section class="pagesec" id="contact">
-  <div class="contact-box fi">
-    <div class="eyebrow" style="justify-content:center;">İletişim</div>
-    <h2 class="sec-t" style="text-align:center;margin-bottom:10px;">Konuşalım mı?</h2>
-    <p style="color:var(--muted);font-size:13px;line-height:1.8;">Staj fırsatları, projeler veya teknoloji konuşmak için — her zaman açığım.</p>
-    <div class="clinks">
-      <a href="mailto:yusufgks03@gmail.com" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>E-posta</a>
-      <a href="https://github.com/Yusuf-Goksu" target="_blank" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>GitHub</a>
-      <a href="https://www.linkedin.com/in/yusuf-göksu" target="_blank" class="clink"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn</a>
-     
+<div class="sec-divider"></div>
+<section class="s" id="skills">
+  <div class="eyebrow" data-tr="Beceriler" data-en="Skills">Beceriler</div>
+  <h2 class="sec-title">
+    <span class="outline" data-tr="ARAÇ" data-en="MY">ARAÇ</span><br>
+    <span data-tr="KUTUM" data-en="TOOLKIT">KUTUM</span>
+  </h2>
+  <div class="skills-layout">
+    <div>
+      <div class="skill-group fi">
+        <div class="sg-header"><span class="sg-icon">📱</span><span class="sg-title" data-tr="Mobil & Frontend" data-en="Mobile & Frontend">Mobil & Frontend</span></div>
+        <div class="skill-bars">
+          <div class="skill-bar"><span class="sb-name">Flutter</span><div class="sb-track"><div class="sb-fill" style="width:88%;animation-delay:0.1s;"></div></div><span class="sb-pct">88%</span></div>
+          <div class="skill-bar"><span class="sb-name">Dart</span><div class="sb-track"><div class="sb-fill" style="width:85%;animation-delay:0.2s;"></div></div><span class="sb-pct">85%</span></div>
+          <div class="skill-bar"><span class="sb-name">React</span><div class="sb-track"><div class="sb-fill" style="width:65%;animation-delay:0.3s;"></div></div><span class="sb-pct">65%</span></div>
+          <div class="skill-bar"><span class="sb-name">HTML/CSS</span><div class="sb-track"><div class="sb-fill" style="width:78%;animation-delay:0.4s;"></div></div><span class="sb-pct">78%</span></div>
+        </div>
+      </div>
+      <div class="skill-group fi" style="margin-top:28px;">
+        <div class="sg-header"><span class="sg-icon">⚙️</span><span class="sg-title" data-tr="Backend" data-en="Backend">Backend</span></div>
+        <div class="skill-bars">
+          <div class="skill-bar"><span class="sb-name">Node.js</span><div class="sb-track"><div class="sb-fill" style="width:82%;animation-delay:0.1s;"></div></div><span class="sb-pct">82%</span></div>
+          <div class="skill-bar"><span class="sb-name">Python</span><div class="sb-track"><div class="sb-fill" style="width:80%;animation-delay:0.2s;"></div></div><span class="sb-pct">80%</span></div>
+          <div class="skill-bar"><span class="sb-name">Java</span><div class="sb-track"><div class="sb-fill" style="width:75%;animation-delay:0.3s;"></div></div><span class="sb-pct">75%</span></div>
+          <div class="skill-bar"><span class="sb-name">FastAPI</span><div class="sb-track"><div class="sb-fill" style="width:70%;animation-delay:0.4s;"></div></div><span class="sb-pct">70%</span></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group fi">
+        <div class="sg-header"><span class="sg-icon">🗄️</span><span class="sg-title" data-tr="Veritabanı & DevOps" data-en="Database & DevOps">Veritabanı & DevOps</span></div>
+        <div class="skill-badges" style="margin-bottom:20px;">
+          <span class="sbadge">MongoDB</span><span class="sbadge">PostgreSQL</span><span class="sbadge">SQL</span>
+          <span class="sbadge">Hibernate</span><span class="sbadge">Docker</span><span class="sbadge">Railway</span>
+          <span class="sbadge">Git</span><span class="sbadge">Linux</span><span class="sbadge">Postman</span>
+        </div>
+      </div>
+      <div class="skill-group fi" style="margin-top:20px;">
+        <div class="sg-header"><span class="sg-icon">🛡️</span><span class="sg-title" data-tr="Siber Güvenlik" data-en="Cybersecurity">Siber Güvenlik</span></div>
+        <div class="skill-badges">
+          <span class="sbadge">CEH</span><span class="sbadge">Malware Analysis</span><span class="sbadge">Reverse Eng.</span>
+          <span class="sbadge">Web Security</span><span class="sbadge">JWT</span><span class="sbadge">Socket.IO</span>
+        </div>
+      </div>
+      <div class="skill-group fi" style="margin-top:20px;">
+        <div class="sg-header"><span class="sg-icon">🤖</span><span class="sg-title" data-tr="Yapay Zeka" data-en="AI / ML">Yapay Zeka</span></div>
+        <div class="skill-badges">
+          <span class="sbadge">scikit-learn</span><span class="sbadge">ML</span><span class="sbadge">Apriori</span><span class="sbadge">FastAPI AI</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<footer><p>© 2026 Yusuf Göksu · Bilgisayar Mühendisi · İnönü Üniversitesi</p></footer>
+<!-- ABOUT -->
+<div class="sec-divider"></div>
+<section class="s" id="about">
+  <div class="eyebrow" data-tr="Hakkımda" data-en="About Me">Hakkımda</div>
+  <div class="about-layout">
+    <div class="about-text fi">
+      <h2 class="sec-title" style="margin-bottom:28px;">
+        <span data-tr="KOD YAZAN" data-en="CODE &">KOD YAZAN</span><br>
+        <span class="outline" data-tr="MÜHENDİS" data-en="ENGINEER">MÜHENDİS</span>
+      </h2>
+      <p data-tr="İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim." data-en="I'm a 4th-year Computer Engineering student at Inonu University. I've developed my competency in software architecture and clean code through projects where I actively use design patterns like <strong>Factory Method, Observer, and Facade</strong>.">İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim.</p>
+      <p data-tr="Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaşırken, Flutter ile gerçek kullanıcılara ulaşan mobil uygulamalar geliştirdim." data-en="While specializing in web security and cybersecurity through Firat Development Agency programs, I developed mobile applications that reach real users with Flutter.">Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaşırken, Flutter ile gerçek kullanıcılara ulaşan mobil uygulamalar geliştirdim.</p>
+      <div class="about-highlight">
+        <p data-tr="Sadece çalışan kod değil — güvenli, sürdürülebilir ve mimari açıdan sağlam yazılım üretmek istiyorum." data-en="Not just working code — I want to build software that is secure, maintainable, and architecturally sound.">"Sadece çalışan kod değil — güvenli, sürdürülebilir ve mimari açıdan sağlam yazılım üretmek istiyorum."</p>
+      </div>
+      <div class="ab-stats">
+        <div class="abs"><div class="abs-n">2+</div><div class="abs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
+        <div class="abs"><div class="abs-n">4</div><div class="abs-l" data-tr="Sertifika" data-en="Certificates">Sertifika</div></div>
+        <div class="abs"><div class="abs-n">10+</div><div class="abs-l" data-tr="Teknoloji" data-en="Technologies">Teknoloji</div></div>
+        <div class="abs"><div class="abs-n">2022</div><div class="abs-l" data-tr="Başlangıç" data-en="Since">Başlangıç</div></div>
+      </div>
+    </div>
+    <div class="about-right fi">
+      <div class="about-photo">
+        <img src="avatar.png" alt="Yusuf Göksu"/>
+        <div class="about-photo-overlay">
+          <div class="apo-name">Yusuf Göksu</div>
+          <div class="apo-role" data-tr="Flutter & Full-Stack Dev" data-en="Flutter & Full-Stack Dev">Flutter & Full-Stack Dev</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="ac-ico2">🎓</div>
+        <div>
+          <div class="ac-t2" data-tr="İnönü Üniversitesi" data-en="Inonu University">İnönü Üniversitesi</div>
+          <div class="ac-s2" data-tr="Bilgisayar Müh. · 2022–Günümüz" data-en="Computer Eng. · 2022–Present">Bilgisayar Müh. · 2022–Günümüz</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="ac-ico2">📍</div>
+        <div>
+          <div class="ac-t2" data-tr="Malatya, Türkiye" data-en="Malatya, Turkey">Malatya, Türkiye</div>
+          <div class="ac-s2" data-tr="Remote'a açık" data-en="Open to Remote">Remote'a açık</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<div class="sec-divider"></div>
+<section class="s" id="certs">
+  <div class="eyebrow" data-tr="Sertifikalar" data-en="Certificates">Sertifikalar</div>
+  <h2 class="sec-title">
+    <span data-tr="BELGELERİM" data-en="MY">BELGELERİM</span><br>
+    <span class="outline" data-tr="" data-en="CREDENTIALS"></span>
+  </h2>
+  <div class="certs-grid">
+    <div class="cert-item fi">
+      <div class="cert-ico" style="background:rgba(255,107,53,0.1);">🔬</div>
+      <div>
+        <div class="cert-name" data-tr="Zararlı Yazılım Analizi & Tersine Mühendislik" data-en="Malware Analysis & Reverse Engineering">Zararlı Yazılım Analizi & Tersine Mühendislik</div>
+        <div class="cert-org">Siber Vatan · Fırat Kalkınma Ajansı</div>
+      </div>
+    </div>
+    <div class="cert-item fi">
+      <div class="cert-ico" style="background:rgba(0,229,255,0.08);">🌐</div>
+      <div>
+        <div class="cert-name" data-tr="Web Güvenliği Eğitimi" data-en="Web Security Training">Web Güvenliği Eğitimi</div>
+        <div class="cert-org">Fırat Kalkınma Ajansı</div>
+      </div>
+    </div>
+    <div class="cert-item fi">
+      <div class="cert-ico" style="background:rgba(124,77,255,0.1);">🛡️</div>
+      <div>
+        <div class="cert-name" data-tr="Siber Güvenlik Eğitimi" data-en="Cybersecurity Training">Siber Güvenlik Eğitimi</div>
+        <div class="cert-org">Fırat Kalkınma Ajansı & AB Projesi</div>
+      </div>
+    </div>
+    <div class="cert-item fi">
+      <div class="cert-ico" style="background:rgba(255,217,61,0.1);">🎯</div>
+      <div>
+        <div class="cert-name" data-tr="Certified Ethical Hacker (CEH) Eğitimi" data-en="Certified Ethical Hacker (CEH) Training">Certified Ethical Hacker (CEH) Eğitimi</div>
+        <div class="cert-org">BG-TEK & Siber Vatan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="sec-divider"></div>
+<section class="s" id="contact">
+  <div class="contact-layout">
+    <div class="contact-left fi">
+      <div class="eyebrow" data-tr="İletişim" data-en="Contact">İletişim</div>
+      <div class="big-text">
+        <span data-tr="KONUŞA" data-en="LET'S">KONUŞA</span><br>
+        <span class="outline" data-tr="LIM MI?" data-en="TALK">LIM MI?</span>
+      </div>
+      <p data-tr="Staj fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme." data-en="Always open for internship opportunities, projects, or to talk about Flutter / cybersecurity. Don't hesitate to reach out.">Staj fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme.</p>
+      <div class="contact-email">
+        <div class="ce-label" data-tr="E-posta" data-en="Email">E-posta</div>
+        <div class="ce-addr">yusufgks03@gmail.com</div>
+      </div>
+    </div>
+    <div class="contact-right fi">
+      <a href="mailto:yusufgks03@gmail.com" class="c-link">
+        <div class="cl-icon" style="background:rgba(0,229,255,0.08);">✉️</div>
+        <div class="cl-text"><div class="cl-t">E-posta</div><div class="cl-s">yusufgks03@gmail.com</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://github.com/Yusuf-Goksu" target="_blank" class="c-link">
+        <div class="cl-icon" style="background:rgba(255,255,255,0.06);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        </div>
+        <div class="cl-text"><div class="cl-t">GitHub</div><div class="cl-s">github.com/Yusuf-Goksu</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://www.linkedin.com/in/yusuf-goksu" target="_blank" class="c-link">
+        <div class="cl-icon" style="background:rgba(0,119,181,0.12);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0077b5" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="cl-text"><div class="cl-t">LinkedIn</div><div class="cl-s">linkedin.com/in/yusuf-goksu</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ft-left">© 2026 Yusuf Göksu</span>
+  <div class="ft-logo">YG.</div>
+  <span class="ft-left" style="text-align:right;" data-tr="Bilgisayar Mühendisi · İnönü Üniversitesi" data-en="Computer Engineer · Inonu University">Bilgisayar Mühendisi · İnönü Üniversitesi</span>
+</footer>
 
 <script>
-/* ── HERO CANVAS ── */
-(function(){
-  const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles, hexes, rains;
-  const COLORS = ['#9b87f5','#4ecdc4','#4d96ff','#c4b8ff','#6bcb77'];
-  const CODE = '01{}[]()<>=!;:/|&%#@$~*+-αβγδΩπ∞≈≠λφψ∂∑'.split('');
+/* CURSOR */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
+animRing();
 
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    init();
-  }
-
-  function init() {
-    // hex grid
-    hexes = [];
-    const s = 40;
-    for (let r = 0; r < Math.ceil(H/(s*1.5))+2; r++) {
-      for (let c = 0; c < Math.ceil(W/(s*1.73))+2; c++) {
-        hexes.push({ x: c*s*1.73+(r%2?s*0.865:0)-s, y: r*s*1.5-s, s, phase: Math.random()*Math.PI*2 });
-      }
+/* LANG */
+let lang='tr';
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  document.querySelectorAll('[data-tr]').forEach(el=>{
+    const val=el.getAttribute('data-'+l);
+    if(val!==undefined&&val!==null){
+      if(el.tagName==='INPUT'||el.tagName==='TEXTAREA'){el.placeholder=val;}
+      else{el.innerHTML=val;}
     }
-
-    // particles
-    const n = Math.min(Math.floor(W*H/13000), 65);
-    particles = Array.from({length:n}, () => ({
-      x: Math.random()*W, y: Math.random()*H,
-      vx: (Math.random()-.5)*0.3, vy: (Math.random()-.5)*0.3,
-      r: Math.random()*1.6+0.5,
-      color: COLORS[Math.floor(Math.random()*COLORS.length)],
-      op: Math.random()*0.45+0.2
-    }));
-
-    // code rain columns
-    rains = [];
-    const cols = Math.floor(W/20);
-    for (let c = 0; c < cols; c++) {
-      if (Math.random() > 0.22) continue;
-      rains.push({
-        x: c*20+10, y: Math.random()*-H*2,
-        speed: Math.random()*0.55+0.18,
-        chars: Array.from({length: Math.floor(Math.random()*14)+6}, () => CODE[Math.floor(Math.random()*CODE.length)]),
-        color: COLORS[Math.floor(Math.random()*COLORS.length)],
-        alpha: Math.random()*0.055+0.02,
-        t: 0
-      });
-    }
-  }
-
-  function hexPath(x, y, s) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const a = Math.PI/3*i - Math.PI/6;
-      i ? ctx.lineTo(x+s*Math.cos(a), y+s*Math.sin(a)) : ctx.moveTo(x+s*Math.cos(a), y+s*Math.sin(a));
-    }
-    ctx.closePath();
-  }
-
-  let frame = 0;
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    frame++;
-
-    // hex grid
-    for (const h of hexes) {
-      const op = 0.022 + 0.012*Math.sin(h.phase + frame*0.007);
-      hexPath(h.x, h.y, h.s);
-      ctx.strokeStyle = `rgba(155,135,245,${op})`;
-      ctx.lineWidth = 0.5;
-      ctx.stroke();
-    }
-
-    // code rain
-    ctx.font = '11px monospace';
-    for (const r of rains) {
-      r.y += r.speed;
-      if (r.y > H + r.chars.length*16) r.y = -r.chars.length*17;
-      r.t++;
-      if (r.t % 20 === 0) r.chars[Math.floor(Math.random()*r.chars.length)] = CODE[Math.floor(Math.random()*CODE.length)];
-      r.chars.forEach((ch, i) => {
-        const fade = (1 - i/r.chars.length) * r.alpha;
-        ctx.globalAlpha = Math.max(0, fade);
-        // parse hex color to rgba
-        const hex = r.color.replace('#','');
-        const rv = parseInt(hex.substring(0,2),16), gv = parseInt(hex.substring(2,4),16), bv = parseInt(hex.substring(4,6),16);
-        ctx.fillStyle = `rgba(${rv},${gv},${bv},1)`;
-        ctx.fillText(ch, r.x, r.y + i*16);
-      });
-      ctx.globalAlpha = 1;
-    }
-
-    // particles + connections
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.globalAlpha = p.op;
-      ctx.fillStyle = p.color;
-      ctx.fill();
-      ctx.globalAlpha = 1;
-      for (let j = i+1; j < particles.length; j++) {
-        const q = particles[j];
-        const dx = p.x-q.x, dy = p.y-q.y, d = Math.sqrt(dx*dx+dy*dy);
-        if (d < 115) {
-          ctx.beginPath();
-          ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y);
-          ctx.strokeStyle = p.color;
-          ctx.lineWidth = 0.35;
-          ctx.globalAlpha = (1-d/115)*0.16;
-          ctx.stroke();
-          ctx.globalAlpha = 1;
-        }
-      }
-    }
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  resize(); draw();
-})();
-
-/* ── SCROLL FADE ── */
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i*65); obs.unobserve(e.target); }
   });
-}, { threshold: 0.08 });
-document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+}
 
-/* ── ACTIVE NAV ── */
-const secs = document.querySelectorAll('[id]');
-const navAs = document.querySelectorAll('.nav-links a');
-window.addEventListener('scroll', () => {
-  let cur = '';
-  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
-  navAs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#'+cur));
+/* SCROLL FADE */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}
+  });
+},{threshold:0.07});
+document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
+
+/* ACTIVE NAV */
+const secs=document.querySelectorAll('section[id]');
+const navAs=document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-140)cur=s.id;});
+  navAs.forEach(a=>a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent)':'');
 });
 
-/* ── HAMBURGER ── */
-function toggleMenu() {
+/* HAMBURGER */
+function toggleMenu(){
   document.getElementById('burg').classList.toggle('open');
   document.getElementById('mobMenu').classList.toggle('open');
 }
-function closeMenu() {
+function closeMenu(){
   document.getElementById('burg').classList.remove('open');
   document.getElementById('mobMenu').classList.remove('open');
 }
