@@ -183,6 +183,82 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .mp-row.accent{background:rgba(0,229,255,0.2);}
 .mp-card-mini{background:rgba(124,77,255,0.15);border-radius:6px;height:40px;margin-bottom:5px;border:1px solid rgba(124,77,255,0.2);}
 
+/* Real app screenshots showcase */
+.vhit-showcase{
+  min-height:430px;
+  gap:0;
+  isolation:isolate;
+}
+.shot-glow{
+  position:absolute;
+  width:260px;
+  height:260px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(0,229,255,0.22),transparent 70%);
+  filter:blur(8px);
+  z-index:0;
+}
+.shot-phone{
+  position:relative;
+  z-index:1;
+  width:190px;
+  aspect-ratio:9/19.5;
+  border-radius:32px;
+  padding:8px;
+  background:linear-gradient(145deg,#1a1a2e,#080812);
+  border:1.5px solid rgba(255,255,255,0.16);
+  box-shadow:0 28px 60px rgba(0,0,0,0.55),0 0 35px rgba(0,229,255,0.08),inset 0 1px 0 rgba(255,255,255,0.12);
+  overflow:hidden;
+}
+.shot-phone img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:25px;
+  display:block;
+}
+.shot-notch{
+  position:absolute;
+  top:8px;
+  left:50%;
+  transform:translateX(-50%);
+  width:74px;
+  height:18px;
+  background:#050510;
+  border-radius:0 0 14px 14px;
+  z-index:3;
+}
+.shot-main{transform:rotate(-4deg) translateX(20px);}
+.shot-side{width:155px;margin-left:-34px;transform:rotate(7deg) translateY(34px);opacity:0.92;}
+.shot-label{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  padding:6px 11px;
+  border-radius:999px;
+  background:rgba(4,4,10,0.72);
+  border:1px solid rgba(0,229,255,0.24);
+  backdrop-filter:blur(10px);
+  color:var(--accent);
+  font-family:var(--fm);
+  font-size:8px;
+  letter-spacing:0.08em;
+  white-space:nowrap;
+}
+@media(max-width:960px){
+  .vhit-showcase{min-height:360px;padding:34px 20px;}
+  .shot-phone{width:165px;}
+  .shot-side{width:130px;margin-left:-28px;}
+}
+@media(max-width:480px){
+  .vhit-showcase{min-height:330px;}
+  .shot-phone{width:145px;}
+  .shot-side{width:115px;}
+  .shot-label{font-size:7px;}
+}
+
+
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .proj-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color 0.3s,transform 0.3s;position:relative;overflow:hidden;}
 .proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent-glow),transparent);opacity:0;transition:opacity 0.3s;}
@@ -510,40 +586,19 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <a href="#contact" class="fp-link sec" data-tr="Detay İste" data-en="Request Details">Detay İste</a>
       </div>
     </div>
-    <div class="fp-right">
-      <div class="fp-phones">
-        <div class="mini-phone">
-          <div class="mp-screen">
-            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div></div>
-            <div class="mp-content">
-              <div class="mp-card-mini" style="background:rgba(0,229,255,0.1);border-color:rgba(0,229,255,0.2);"></div>
-              <div class="mp-row accent"></div>
-              <div class="mp-row"></div>
-              <div class="mp-row short"></div>
-            </div>
-          </div>
-        </div>
-        <div class="mini-phone shift">
-          <div class="mp-screen">
-            <div class="mp-bar"><div class="mp-dot"></div></div>
-            <div class="mp-content">
-              <div class="mp-row accent"></div>
-              <div class="mp-row short"></div>
-              <div class="mp-card-mini"></div>
-              <div class="mp-row"></div>
-            </div>
-          </div>
-        </div>
-        <div class="mini-phone shift2">
-          <div class="mp-screen">
-            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div></div>
-            <div class="mp-content">
-              <div class="mp-row"></div>
-              <div class="mp-row accent"></div>
-              <div class="mp-card-mini" style="height:60px;background:rgba(0,229,255,0.08);"></div>
-            </div>
-          </div>
-        </div>
+    <div class="fp-right vhit-showcase">
+      <div class="shot-glow"></div>
+
+      <div class="shot-phone shot-main">
+        <div class="shot-notch"></div>
+        <img src="vhit-home.jpg" alt="v-HIT Vision ana ekran görüntüsü">
+        <div class="shot-label">Klinik Dashboard</div>
+      </div>
+
+      <div class="shot-phone shot-side">
+        <div class="shot-notch"></div>
+        <img src="vhit-splash.jpg" alt="v-HIT Vision splash ekranı">
+        <div class="shot-label">Splash Screen</div>
       </div>
     </div>
   </div>
