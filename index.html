@@ -28,12 +28,10 @@ html{scroll-behavior:smooth;}
 }
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-size:15px;line-height:1.7;overflow-x:hidden;cursor:none;}
 
-/* CUSTOM CURSOR */
 #cursor{position:fixed;width:10px;height:10px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;mix-blend-mode:difference;}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,229,255,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.12s ease,width 0.25s,height 0.25s;}
 body:has(a:hover) #cursor,body:has(button:hover) #cursor{width:18px;height:18px;}
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px;background:rgba(4,4,10,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:var(--fd);font-size:26px;letter-spacing:0.05em;color:var(--accent);}
 .nav-links{display:flex;align-items:center;gap:32px;}
@@ -52,7 +50,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .mob-menu a{font-family:var(--fm);font-size:13px;color:var(--muted);text-decoration:none;padding:12px 0;border-bottom:1px solid var(--border);}
 .mob-menu a:last-child{border:none;margin-top:8px;background:var(--accent);color:#04040a;padding:12px 0;border-radius:8px;text-align:center;font-weight:500;}
 
-/* HERO */
 #hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:80px 48px 60px;overflow:hidden;}
 .hero-noise{position:absolute;inset:0;opacity:0.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;}
 .hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 70% 70% at 60% 50%,black 0%,transparent 80%);}
@@ -60,7 +57,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-glow2{position:absolute;bottom:10%;left:5%;width:350px;height:350px;background:radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%);pointer-events:none;}
 
 .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 420px;gap:0;align-items:center;width:100%;max-width:1200px;margin:0 auto;}
-
 .hero-left{padding-right:60px;}
 .hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;animation:fadeUp 0.6s ease both;}
 .h-line{width:32px;height:1px;background:var(--accent);}
@@ -71,18 +67,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hero-title{font-family:var(--fd);font-size:clamp(72px,9vw,130px);line-height:0.92;letter-spacing:0.02em;animation:fadeUp 0.6s 0.1s ease both;}
 .hero-title .outline{-webkit-text-stroke:1.5px var(--text);color:transparent;}
 .hero-title .filled{color:var(--text);}
-.hero-title .accent-word{color:var(--accent);-webkit-text-stroke:0;}
-
 .hero-role{font-family:var(--fm);font-size:12px;letter-spacing:0.1em;color:var(--muted);margin-top:18px;animation:fadeUp 0.6s 0.18s ease both;}
 .hero-role span{color:var(--accent);}
-
 .hero-desc{font-size:14px;color:var(--muted);line-height:1.9;margin-top:20px;max-width:440px;animation:fadeUp 0.6s 0.26s ease both;}
 
-.hero-cta{display:flex;gap:12px;margin-top:32px;animation:fadeUp 0.6s 0.34s ease both;}
+.hero-cta{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;animation:fadeUp 0.6s 0.34s ease both;}
 .btn-main{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#04040a;font-family:var(--fb);font-size:13px;font-weight:700;padding:14px 28px;border-radius:4px;border:none;cursor:pointer;text-decoration:none;letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;}
 .btn-main:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,229,255,0.3);}
 .btn-ghost{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--text);font-family:var(--fm);font-size:11px;font-weight:400;padding:14px 24px;border-radius:4px;border:1px solid var(--border2);cursor:pointer;text-decoration:none;letter-spacing:0.08em;transition:border-color 0.2s,background 0.2s;}
 .btn-ghost:hover{border-color:var(--accent);background:rgba(0,229,255,0.04);}
+.btn-cv{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--accent);font-family:var(--fm);font-size:11px;font-weight:400;padding:14px 24px;border-radius:4px;border:1px solid rgba(0,229,255,0.35);cursor:pointer;text-decoration:none;letter-spacing:0.08em;transition:border-color 0.2s,background 0.2s,box-shadow 0.2s;}
+.btn-cv:hover{border-color:var(--accent);background:rgba(0,229,255,0.06);box-shadow:0 0 20px rgba(0,229,255,0.1);}
 
 .hero-stats{display:flex;gap:0;margin-top:40px;border:1px solid var(--border);border-radius:8px;overflow:hidden;animation:fadeUp 0.6s 0.42s ease both;}
 .hs{flex:1;padding:16px 20px;border-right:1px solid var(--border);}
@@ -90,7 +85,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .hs-n{font-family:var(--fd);font-size:28px;color:var(--accent);line-height:1;}
 .hs-l{font-family:var(--fm);font-size:9px;letter-spacing:0.1em;color:var(--dim);margin-top:4px;text-transform:uppercase;}
 
-/* PHONE MOCKUP */
 .hero-right{display:flex;justify-content:center;align-items:center;animation:fadeUp 0.6s 0.2s ease both;}
 .phone-wrap{position:relative;}
 .phone{width:260px;height:520px;background:linear-gradient(145deg,#1a1a2e,#0f0f1e);border:2px solid rgba(255,255,255,0.12);border-radius:44px;position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.05),inset 0 1px 0 rgba(255,255,255,0.08);}
@@ -100,33 +94,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 .app-topbar{position:absolute;top:34px;left:0;right:0;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;}
 .app-logo-t{font-family:var(--fd);font-size:18px;color:var(--accent);letter-spacing:0.05em;}
 .app-notif{width:24px;height:24px;background:rgba(0,229,255,0.15);border-radius:6px;display:flex;align-items:center;justify-content:center;}
-
 .app-hero-card{position:absolute;top:90px;left:12px;right:12px;background:linear-gradient(135deg,rgba(124,77,255,0.3),rgba(0,229,255,0.15));border:1px solid rgba(0,229,255,0.2);border-radius:18px;padding:16px;backdrop-filter:blur(10px);}
 .ahc-label{font-size:9px;color:var(--accent);font-family:var(--fm);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
 .ahc-title{font-family:var(--fd);font-size:20px;color:var(--text);line-height:1.1;}
 .ahc-sub{font-size:9px;color:var(--muted);margin-top:4px;font-family:var(--fm);}
 .ahc-bar{margin-top:10px;height:3px;background:rgba(255,255,255,0.1);border-radius:2px;}
 .ahc-bar-fill{height:100%;width:73%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px;}
-
 .app-cards{position:absolute;top:220px;left:12px;right:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 .app-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:10px;}
 .ac-icon{font-size:16px;margin-bottom:4px;}
 .ac-t{font-size:8px;color:var(--muted);font-family:var(--fm);letter-spacing:0.06em;}
 .ac-n{font-family:var(--fd);font-size:16px;color:var(--text);}
-
 .app-chat{position:absolute;top:350px;left:12px;right:12px;}
 .chat-label{font-size:8px;color:var(--dim);font-family:var(--fm);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
 .chat-bubble{background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.15);border-radius:10px 10px 10px 2px;padding:7px 10px;font-size:9px;color:var(--muted);margin-bottom:4px;max-width:80%;}
 .chat-bubble.right{background:rgba(124,77,255,0.15);border-color:rgba(124,77,255,0.2);border-radius:10px 10px 2px 10px;margin-left:auto;font-family:var(--fm);}
-
 .app-navbar{position:absolute;bottom:0;left:0;right:0;height:60px;background:rgba(10,10,20,0.95);border-top:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-around;padding-bottom:6px;}
 .nav-ic{display:flex;flex-direction:column;align-items:center;gap:3px;}
 .nav-ic-dot{width:18px;height:18px;border-radius:5px;background:rgba(255,255,255,0.06);}
 .nav-ic-dot.active{background:rgba(0,229,255,0.2);}
 .nav-ic-label{font-size:6px;color:var(--dim);font-family:var(--fm);}
 .nav-ic-label.active{color:var(--accent);}
-
-/* phone floats */
 .ph-float{position:absolute;display:flex;align-items:center;gap:8px;background:rgba(10,10,20,0.9);border:1px solid var(--border2);border-radius:10px;padding:8px 14px;font-size:11px;font-weight:600;white-space:nowrap;backdrop-filter:blur(12px);animation:phFloat 3.5s ease-in-out infinite;}
 .ph-float-ico{font-size:16px;}
 .ph-f1{top:-20px;right:-70px;animation-delay:0s;}
@@ -135,14 +123,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:cen
 @keyframes phFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .phone-shadow{position:absolute;bottom:-40px;left:50%;transform:translateX(-50%);width:180px;height:40px;background:radial-gradient(ellipse,rgba(0,229,255,0.2) 0%,transparent 70%);}
 
-/* TICKER */
 .ticker-wrap{background:var(--accent);overflow:hidden;padding:12px 0;position:relative;z-index:10;}
 .ticker-track{display:flex;width:max-content;animation:tick 25s linear infinite;}
 .ti{display:flex;align-items:center;gap:10px;padding:0 24px;font-family:var(--fd);font-size:14px;letter-spacing:0.06em;color:#04040a;white-space:nowrap;}
 .ti-sep{opacity:0.4;}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-/* SECTIONS */
 section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .sec-divider{border-top:1px solid var(--border);margin:0 48px;}
 .eyebrow{font-family:var(--fm);font-size:10px;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
@@ -150,7 +136,25 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .sec-title{font-family:var(--fd);font-size:clamp(48px,6vw,80px);line-height:0.95;letter-spacing:0.02em;margin-bottom:60px;}
 .sec-title .outline{-webkit-text-stroke:1px rgba(240,240,255,0.3);color:transparent;}
 
-/* FEATURED PROJECT */
+/* EXPERIENCE */
+.exp-timeline{display:flex;flex-direction:column;gap:0;}
+.exp-item{display:grid;grid-template-columns:200px 1fr;gap:0;position:relative;}
+.exp-item::before{content:'';position:absolute;left:199px;top:0;bottom:0;width:1px;background:var(--border2);}
+.exp-left{padding:0 32px 48px 0;text-align:right;}
+.exp-date{font-family:var(--fm);font-size:10px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:6px;}
+.exp-company{font-family:var(--fd);font-size:16px;letter-spacing:0.04em;color:var(--text);}
+.exp-type{font-family:var(--fm);font-size:9px;color:var(--dim);margin-top:3px;}
+.exp-dot{position:absolute;left:193px;top:6px;width:13px;height:13px;border-radius:50%;background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(0,229,255,0.25);}
+.exp-right{padding:0 0 48px 32px;}
+.exp-title{font-family:var(--fd);font-size:22px;letter-spacing:0.02em;margin-bottom:8px;}
+.exp-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:4px;padding:3px 10px;font-family:var(--fm);font-size:9px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:14px;}
+.exp-desc{font-size:13px;color:var(--muted);line-height:1.85;margin-bottom:16px;}
+.exp-achievements{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.exp-ach{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);line-height:1.6;}
+.exp-ach::before{content:'→';color:var(--accent);font-family:var(--fm);font-size:11px;flex-shrink:0;margin-top:2px;}
+.exp-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.etag{font-family:var(--fm);font-size:9px;padding:3px 9px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--dim);letter-spacing:0.05em;}
+
 .feat-proj{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:20px;overflow:hidden;background:var(--surface);margin-bottom:20px;}
 .fp-left{padding:48px;display:flex;flex-direction:column;justify-content:space-between;}
 .fp-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:4px;padding:4px 12px;font-family:var(--fm);font-size:9px;letter-spacing:0.1em;color:var(--accent);text-transform:uppercase;margin-bottom:20px;width:fit-content;}
@@ -164,7 +168,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .fp-link.primary:hover{box-shadow:0 8px 28px rgba(0,229,255,0.3);}
 .fp-link.sec{border:1px solid var(--border2);color:var(--muted);}
 .fp-link.sec:hover{border-color:var(--accent);color:var(--accent);}
-
 .fp-right{background:linear-gradient(135deg,rgba(124,77,255,0.08),rgba(0,229,255,0.04));border-left:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:40px;position:relative;overflow:hidden;}
 .fp-right::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.03) 1px,transparent 1px);background-size:30px 30px;}
 .fp-phones{display:flex;gap:-20px;align-items:flex-end;position:relative;z-index:1;}
@@ -180,7 +183,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .mp-row.accent{background:rgba(0,229,255,0.2);}
 .mp-card-mini{background:rgba(124,77,255,0.15);border-radius:6px;height:40px;margin-bottom:5px;border:1px solid rgba(124,77,255,0.2);}
 
-/* PROJECT GRID */
 .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .proj-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color 0.3s,transform 0.3s;position:relative;overflow:hidden;}
 .proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent-glow),transparent);opacity:0;transition:opacity 0.3s;}
@@ -192,7 +194,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .pc-tags{display:flex;flex-wrap:wrap;gap:4px;position:relative;z-index:1;}
 .pctag{font-family:var(--fm);font-size:9px;padding:3px 8px;border-radius:3px;background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--dim);}
 
-/* HOW I WORK */
 .flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .flow-step{padding:28px 24px;border-right:1px solid var(--border);position:relative;}
 .flow-step:last-child{border-right:none;}
@@ -202,7 +203,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .fs-desc{font-size:11px;color:var(--muted);line-height:1.7;font-family:var(--fm);}
 .fs-arrow{position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:var(--surface2);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:1;font-size:10px;color:var(--accent);}
 
-/* SKILLS */
 .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
 .skill-group{margin-bottom:28px;}
 .sg-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
@@ -215,12 +215,10 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .sb-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent2),var(--accent));transform-origin:left;animation:barGrow 1s ease both;}
 @keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 .sb-pct{font-family:var(--fm);font-size:9px;color:var(--dim);width:30px;text-align:right;}
-
 .skill-badges{display:flex;flex-wrap:wrap;gap:6px;}
 .sbadge{font-family:var(--fm);font-size:10px;padding:6px 14px;border-radius:4px;border:1px solid var(--border2);color:var(--muted);letter-spacing:0.05em;transition:all 0.2s;}
 .sbadge:hover{border-color:var(--accent);color:var(--accent);background:rgba(0,229,255,0.04);}
 
-/* ABOUT */
 .about-layout{display:grid;grid-template-columns:1fr 400px;gap:80px;align-items:center;}
 .about-text p{font-size:14px;color:var(--muted);line-height:1.9;margin-bottom:16px;}
 .about-text p strong{color:var(--text);}
@@ -230,7 +228,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .abs{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;}
 .abs-n{font-family:var(--fd);font-size:36px;color:var(--accent);line-height:1;}
 .abs-l{font-family:var(--fm);font-size:9px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
-
 .about-right{display:flex;flex-direction:column;gap:12px;}
 .about-photo{width:100%;aspect-ratio:3/4;background:var(--surface);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;}
 .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
@@ -242,7 +239,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .ac-t2{font-size:12px;font-weight:600;}
 .ac-s2{font-size:10px;color:var(--muted);font-family:var(--fm);margin-top:2px;}
 
-/* CERTS */
 .certs-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .cert-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;display:flex;align-items:flex-start;gap:16px;transition:all 0.25s;}
 .cert-item:hover{border-color:rgba(0,229,255,0.25);transform:translateX(4px);}
@@ -250,7 +246,6 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .cert-name{font-size:13px;font-weight:600;margin-bottom:4px;}
 .cert-org{font-family:var(--fm);font-size:9px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;}
 
-/* CONTACT */
 .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
 .contact-left .big-text{font-family:var(--fd);font-size:clamp(48px,7vw,90px);line-height:0.95;letter-spacing:0.02em;}
 .contact-left .big-text .outline{-webkit-text-stroke:1px rgba(240,240,255,0.2);color:transparent;}
@@ -263,22 +258,18 @@ section.s{padding:100px 48px;max-width:1200px;margin:0 auto;}
 .cl-text .cl-s{font-family:var(--fm);font-size:10px;color:var(--muted);margin-top:2px;}
 .cl-arrow{margin-left:auto;font-size:16px;color:var(--dim);transition:color 0.2s,transform 0.2s;}
 .c-link:hover .cl-arrow{color:var(--accent);transform:translateX(3px);}
-
 .contact-email{margin-top:24px;padding-top:24px;border-top:1px solid var(--border);}
 .ce-label{font-family:var(--fm);font-size:9px;letter-spacing:0.12em;color:var(--dim);text-transform:uppercase;margin-bottom:8px;}
 .ce-addr{font-family:var(--fd);font-size:20px;color:var(--accent);letter-spacing:0.04em;}
 
-/* FOOTER */
 footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;}
 .ft-left{font-family:var(--fm);font-size:10px;color:var(--dim);letter-spacing:0.08em;}
 .ft-logo{font-family:var(--fd);font-size:20px;color:var(--accent);}
 
-/* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 .fi{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease;}
 .fi.vis{opacity:1;transform:translateY(0);}
 
-/* RESPONSIVE */
 @media(max-width:960px){
   nav{padding:0 20px;}
   .nav-links{display:none;}
@@ -299,6 +290,11 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
   .about-right{display:none;}
   .certs-grid{grid-template-columns:1fr;}
   .contact-layout{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;padding-left:24px;}
+  .exp-item::before{left:0;}
+  .exp-dot{left:-6px;}
+  .exp-left{text-align:left;padding:0 0 8px 16px;}
+  .exp-right{padding:0 0 40px 16px;}
   section.s{padding:60px 20px;}
   .sec-divider{margin:0 20px;}
   footer{padding:20px;flex-direction:column;gap:10px;text-align:center;}
@@ -320,10 +316,10 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">YG.</div>
   <div class="nav-links">
+    <a href="#experience" data-tr="Deneyim" data-en="Experience">Deneyim</a>
     <a href="#projects" data-tr="Projeler" data-en="Projects">Projeler</a>
     <a href="#skills" data-tr="Beceriler" data-en="Skills">Beceriler</a>
     <a href="#about" data-tr="Hakkımda" data-en="About">Hakkımda</a>
@@ -337,6 +333,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
 </nav>
 
 <div class="mob-menu" id="mobMenu">
+  <a href="#experience" onclick="closeMenu()" data-tr="Deneyim" data-en="Experience">Deneyim</a>
   <a href="#projects" onclick="closeMenu()" data-tr="Projeler" data-en="Projects">Projeler</a>
   <a href="#skills" onclick="closeMenu()" data-tr="Beceriler" data-en="Skills">Beceriler</a>
   <a href="#about" onclick="closeMenu()" data-tr="Hakkımda" data-en="About">Hakkımda</a>
@@ -354,7 +351,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     <div class="hero-left">
       <div class="hero-eyebrow">
         <div class="h-line"></div>
-        <span class="h-tag" data-tr="Staja Hazır · İnönü Üniversitesi" data-en="Available for Internship · Inonu University">Staja Hazır · İnönü Üniversitesi</span>
+        <span class="h-tag" data-tr="Mezun · ATN Softtech Başarı Belgesi · 2026" data-en="Graduate · ATN Softtech Achievement · 2026">Mezun · ATN Softtech Başarı Belgesi · 2026</span>
         <div class="status-dot"></div>
       </div>
       <h1 class="hero-title">
@@ -362,22 +359,25 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <span class="filled">GÖKSU</span>
       </h1>
       <p class="hero-role"><span data-tr="Flutter & Full-Stack Developer" data-en="Flutter & Full-Stack Developer">Flutter & Full-Stack Developer</span> <span style="color:var(--dim);margin:0 8px;">/</span> <span data-tr="Siber Güvenlik" data-en="Cybersecurity">Siber Güvenlik</span></p>
-      <p class="hero-desc" data-tr="OOP prensiplerine hakim, Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum." data-en="Computer engineer with strong OOP fundamentals, production-deployed Flutter apps, and CEH training. I build secure, architecturally sound software.">OOP prensiplerine hakim, Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum.</p>
+      <p class="hero-desc" data-tr="OOP prensiplerine hakim, TÜBİTAK projesi kapsamında Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum." data-en="Computer engineer with strong OOP fundamentals, production Flutter apps within a TÜBİTAK project, and CEH training. I build secure, architecturally sound software.">OOP prensiplerine hakim, TÜBİTAK projesi kapsamında Flutter ile üretim ortamına deploy edilmiş mobil uygulamalar geliştirmiş ve CEH eğitimi almış bilgisayar mühendisi. Güvenli, mimari standartlara uygun yazılım üretiyorum.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn-main" data-tr="Projeleri İncele →" data-en="View Projects →">Projeleri İncele →</a>
+        <a href="Yusuf_Goksu_CV.pdf" download class="btn-cv">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-tr="CV İndir" data-en="Download CV">CV İndir</span>
+        </a>
         <a href="mailto:yusufgks03@gmail.com" class="btn-ghost" data-tr="İletişim Kur" data-en="Get in Touch">İletişim Kur</a>
       </div>
       <div class="hero-stats">
-        <div class="hs"><div class="hs-n">2+</div><div class="hs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
+        <div class="hs"><div class="hs-n">3+</div><div class="hs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
         <div class="hs"><div class="hs-n">4</div><div class="hs-l" data-tr="Sertifika" data-en="Certificates">Sertifika</div></div>
         <div class="hs"><div class="hs-n">10+</div><div class="hs-l" data-tr="Teknoloji" data-en="Technologies">Teknoloji</div></div>
-        <div class="hs"><div class="hs-n">4.</div><div class="hs-l" data-tr="Sınıf" data-en="Year">Sınıf</div></div>
+        <div class="hs"><div class="hs-n">3.50</div><div class="hs-l" data-tr="GPA / 4.00" data-en="GPA / 4.00">GPA / 4.00</div></div>
       </div>
     </div>
 
     <div class="hero-right">
       <div class="phone-wrap">
-        <!-- Phone mockup -->
         <div class="phone">
           <div class="phone-screen">
             <div class="app-bg"></div>
@@ -394,16 +394,8 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
               <div class="ahc-bar"><div class="ahc-bar-fill"></div></div>
             </div>
             <div class="app-cards">
-              <div class="app-card">
-                <div class="ac-icon">📚</div>
-                <div class="ac-t">DERSLER</div>
-                <div class="ac-n">12</div>
-              </div>
-              <div class="app-card">
-                <div class="ac-icon">✅</div>
-                <div class="ac-t">GÖREV</div>
-                <div class="ac-n">5</div>
-              </div>
+              <div class="app-card"><div class="ac-icon">📚</div><div class="ac-t">DERSLER</div><div class="ac-n">12</div></div>
+              <div class="app-card"><div class="ac-icon">✅</div><div class="ac-t">GÖREV</div><div class="ac-n">5</div></div>
             </div>
             <div class="app-chat">
               <div class="chat-label">CANLI MESAJ</div>
@@ -418,7 +410,6 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
             </div>
           </div>
         </div>
-        <!-- Float badges -->
         <div class="ph-float ph-f1"><span class="ph-float-ico">📱</span>Flutter 3.x</div>
         <div class="ph-float ph-f2"><span class="ph-float-ico">🟢</span>Railway Live</div>
         <div class="ph-float ph-f3"><span class="ph-float-ico">🤖</span>AI Powered</div>
@@ -434,6 +425,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     <div class="ti">FLUTTER</div><div class="ti ti-sep">◆</div>
     <div class="ti">NODE.JS</div><div class="ti ti-sep">◆</div>
     <div class="ti">PYTHON</div><div class="ti ti-sep">◆</div>
+    <div class="ti">TUBITAK PROJESİ</div><div class="ti ti-sep">◆</div>
     <div class="ti">MONGODB</div><div class="ti ti-sep">◆</div>
     <div class="ti">SOCKET.IO</div><div class="ti ti-sep">◆</div>
     <div class="ti">FASTAPI</div><div class="ti ti-sep">◆</div>
@@ -444,6 +436,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     <div class="ti">FLUTTER</div><div class="ti ti-sep">◆</div>
     <div class="ti">NODE.JS</div><div class="ti ti-sep">◆</div>
     <div class="ti">PYTHON</div><div class="ti ti-sep">◆</div>
+    <div class="ti">TUBITAK PROJESİ</div><div class="ti ti-sep">◆</div>
     <div class="ti">MONGODB</div><div class="ti ti-sep">◆</div>
     <div class="ti">SOCKET.IO</div><div class="ti ti-sep">◆</div>
     <div class="ti">FASTAPI</div><div class="ti ti-sep">◆</div>
@@ -454,6 +447,43 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
   </div>
 </div>
 
+<!-- EXPERIENCE -->
+<div class="sec-divider"></div>
+<section class="s" id="experience">
+  <div class="eyebrow" data-tr="Deneyim" data-en="Experience">Deneyim</div>
+  <h2 class="sec-title">
+    <span data-tr="İŞ" data-en="WORK">İŞ</span><br>
+    <span class="outline" data-tr="DENEYİMİ" data-en="EXPERIENCE">DENEYİMİ</span>
+  </h2>
+  <div class="exp-timeline">
+    <div class="exp-item fi">
+      <div class="exp-left">
+        <div class="exp-date" data-tr="Şub 2026 — Haz 2026" data-en="Feb 2026 — Jun 2026">Şub 2026 — Haz 2026</div>
+        <div class="exp-company">ATN Yazılım<br>ATN Softtech</div>
+        <div class="exp-type" data-tr="İşletmede Mesleki Eğitim" data-en="Internship / Vocational Training">İşletmede Mesleki Eğitim</div>
+      </div>
+      <div class="exp-dot"></div>
+      <div class="exp-right">
+        <div class="exp-title" data-tr="Mobil Yazılım Geliştirici" data-en="Mobile Software Developer">Mobil Yazılım Geliştirici</div>
+        <div class="exp-badge">✦ TÜBİTAK Projesi · Kahramanmaraş Teknopark</div>
+        <p class="exp-desc" data-tr="Sağlık teknolojileri alanında geliştirilen ve TÜBİTAK tarafından desteklenen v-HIT Vision mobil uygulamasının yazılım geliştirme sürecinde görev aldım. Doktor odaklı klinik iş akışını destekleyen medikal yazılım projesine katkı sağladım." data-en="Worked on the software development of v-HIT Vision, a TÜBİTAK-supported mobile application in the field of health technologies. Contributed to a medical software project supporting doctor-focused clinical workflows.">Sağlık teknolojileri alanında geliştirilen ve TÜBİTAK tarafından desteklenen v-HIT Vision mobil uygulamasının yazılım geliştirme sürecinde görev aldım. Doktor odaklı klinik iş akışını destekleyen medikal yazılım projesine katkı sağladım.</p>
+        <div class="exp-achievements">
+          <div class="exp-ach" data-tr="Hasta yönetimi, test geçmişi, randevu takibi, PDF raporlama ve admin panel modüllerine katkı sağladım." data-en="Contributed to patient management, test history, appointment tracking, PDF reporting and admin panel modules.">Hasta yönetimi, test geçmişi, randevu takibi, PDF raporlama ve admin panel modüllerine katkı sağladım.</div>
+          <div class="exp-ach" data-tr="Flutter/Dart mobil katman, Kotlin/Android native analiz ve Firebase veri modelini geliştirdim." data-en="Developed Flutter/Dart mobile layer, Kotlin/Android native analysis and Firebase data model.">Flutter/Dart mobil katman, Kotlin/Android native analiz ve Firebase veri modelini geliştirdim.</div>
+          <div class="exp-ach" data-tr="Gerçek zamanlı kamera ve galeri video analizi ile v-HIT test sürecinin mobil ortamda yürütülmesine katkı sağladım." data-en="Contributed to running the v-HIT test process in mobile environment with real-time camera and gallery video analysis.">Gerçek zamanlı kamera ve galeri video analizi ile v-HIT test sürecinin mobil ortamda yürütülmesine katkı sağladım.</div>
+          <div class="exp-ach" data-tr="Canlı grafik akışı, performans iyileştirme, güvenli kamera geçişleri ve sürdürülebilir kod mimarisi konularında pratik deneyim edindim." data-en="Gained hands-on experience in live graph streaming, performance optimization, secure camera transitions and sustainable code architecture.">Canlı grafik akışı, performans iyileştirme, güvenli kamera geçişleri ve sürdürülebilir kod mimarisi konularında pratik deneyim edindim.</div>
+          <div class="exp-ach" data-tr="Süreç sonunda ATN Softtech tarafından Başarı Belgesi almaya hak kazandım." data-en="Earned an Achievement Certificate from ATN Softtech upon completion.">Süreç sonunda ATN Softtech tarafından <strong style="color:var(--accent);">Başarı Belgesi</strong> almaya hak kazandım.</div>
+        </div>
+        <div class="exp-tags">
+          <span class="etag">Flutter</span><span class="etag">Dart</span><span class="etag">Kotlin</span><span class="etag">Android</span>
+          <span class="etag">Firebase</span><span class="etag">MediaPipe</span><span class="etag">OpenCV</span>
+          <span class="etag">Next.js</span><span class="etag">React</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
 <div class="sec-divider"></div>
 <section class="s" id="projects">
@@ -463,21 +493,76 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     <span data-tr="İNŞA ETTİM" data-en="I BUILT">İNŞA ETTİM</span>
   </h2>
 
-  <!-- Featured -->
+  <!-- v-HIT Featured -->
+  <div class="feat-proj fi" style="margin-bottom:20px;">
+    <div class="fp-left">
+      <div>
+        <div class="fp-badge">✦ TÜBİTAK · Medikal Proje</div>
+        <div class="fp-title" data-tr="v-HIT Vision<br>Mobil Uygulama" data-en="v-HIT Vision<br>Mobile App">v-HIT Vision<br>Mobil Uygulama</div>
+        <p class="fp-desc" data-tr="Kahramanmaraş Teknopark'ta geliştirilen TÜBİTAK destekli sağlık teknolojisi projesi. Doktor odaklı klinik iş akışı; hasta yönetimi, test kaydı, gerçek zamanlı video analizi, PDF raporlama ve admin panel modüllerini kapsıyor." data-en="TÜBİTAK-supported health tech project developed at Kahramanmaraş Technopark. Doctor-focused clinical workflow including patient management, test recording, real-time video analysis, PDF reporting and admin panel modules.">Kahramanmaraş Teknopark'ta geliştirilen TÜBİTAK destekli sağlık teknolojisi projesi. Doktor odaklı klinik iş akışı; hasta yönetimi, test kaydı, gerçek zamanlı video analizi, PDF raporlama ve admin panel modüllerini kapsıyor.</p>
+        <div class="fp-tags">
+          <span class="ftag">Flutter</span><span class="ftag">Dart</span><span class="ftag">Kotlin</span><span class="ftag">Android</span>
+          <span class="ftag">Firebase</span><span class="ftag">MediaPipe</span><span class="ftag">OpenCV</span><span class="ftag">Next.js</span>
+        </div>
+      </div>
+      <div class="fp-links">
+        <a href="https://github.com/Yusuf-Goksu" target="_blank" class="fp-link primary" data-tr="GitHub'da Gör →" data-en="View on GitHub →">GitHub'da Gör →</a>
+        <a href="#contact" class="fp-link sec" data-tr="Detay İste" data-en="Request Details">Detay İste</a>
+      </div>
+    </div>
+    <div class="fp-right">
+      <div class="fp-phones">
+        <div class="mini-phone">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-card-mini" style="background:rgba(0,229,255,0.1);border-color:rgba(0,229,255,0.2);"></div>
+              <div class="mp-row accent"></div>
+              <div class="mp-row"></div>
+              <div class="mp-row short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-phone shift">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-row accent"></div>
+              <div class="mp-row short"></div>
+              <div class="mp-card-mini"></div>
+              <div class="mp-row"></div>
+            </div>
+          </div>
+        </div>
+        <div class="mini-phone shift2">
+          <div class="mp-screen">
+            <div class="mp-bar"><div class="mp-dot"></div><div class="mp-dot"></div></div>
+            <div class="mp-content">
+              <div class="mp-row"></div>
+              <div class="mp-row accent"></div>
+              <div class="mp-card-mini" style="height:60px;background:rgba(0,229,255,0.08);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Dershane Featured -->
   <div class="feat-proj fi">
     <div class="fp-left">
       <div>
         <div class="fp-badge" data-tr="✦ Öne Çıkan Proje" data-en="✦ Featured Project">✦ Öne Çıkan Proje</div>
         <div class="fp-title" data-tr="AI Destekli<br>Dershane Uygulaması" data-en="AI-Powered<br>Tutoring App">AI Destekli<br>Dershane Uygulaması</div>
-        <p class="fp-desc" data-tr="Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor. Factory Method & Observer tasarım kalıpları uygulandı." data-en="Full-stack mobile platform for student, teacher and parent roles. Includes real-time messaging, AI-powered test analysis, push notifications, and production deployment on Railway. Factory Method & Observer design patterns applied.">Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor. Factory Method & Observer tasarım kalıpları uygulandı.</p>
+        <p class="fp-desc" data-tr="Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor." data-en="Full-stack mobile platform for student, teacher and parent roles. Includes real-time messaging, AI-powered test analysis, push notifications, and production deployment on Railway.">Öğrenci, öğretmen ve veli rolleri için geliştirilmiş full-stack mobil platform. Gerçek zamanlı mesajlaşma, AI destekli deneme analizi, anlık bildirimler ve Railway üzerinde production deployment içeriyor.</p>
         <div class="fp-tags">
           <span class="ftag">Flutter</span><span class="ftag">Node.js</span><span class="ftag">MongoDB</span>
           <span class="ftag">Socket.IO</span><span class="ftag">Python / FastAPI</span><span class="ftag">Firebase FCM</span>
-          <span class="ftag">JWT Auth</span><span class="ftag">Railway</span><span class="ftag">REST API</span>
+          <span class="ftag">JWT Auth</span><span class="ftag">Railway</span>
         </div>
       </div>
       <div class="fp-links">
-        <a href="https://github.com/Yusuf-Goksu" target="_blank" class="fp-link primary" data-tr="GitHub'da Gör →" data-en="View on GitHub →">GitHub'da Gör →</a>
+        <a href="https://github.com/Yusuf-Goksu/dershane-project" target="_blank" class="fp-link primary" data-tr="GitHub'da Gör →" data-en="View on GitHub →">GitHub'da Gör →</a>
         <a href="#contact" class="fp-link sec" data-tr="Demo İste" data-en="Request Demo">Demo İste</a>
       </div>
     </div>
@@ -491,7 +576,6 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
               <div class="mp-row accent"></div>
               <div class="mp-row"></div>
               <div class="mp-row short"></div>
-              <div class="mp-row"></div>
             </div>
           </div>
         </div>
@@ -502,7 +586,6 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
               <div class="mp-row accent"></div>
               <div class="mp-row short"></div>
               <div class="mp-card-mini" style="background:rgba(0,229,255,0.1);border-color:rgba(0,229,255,0.2);"></div>
-              <div class="mp-row"></div>
             </div>
           </div>
         </div>
@@ -512,7 +595,6 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
             <div class="mp-content">
               <div class="mp-row"></div>
               <div class="mp-row accent"></div>
-              <div class="mp-row short"></div>
               <div class="mp-card-mini" style="height:60px;background:rgba(124,77,255,0.1);"></div>
             </div>
           </div>
@@ -521,7 +603,6 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     </div>
   </div>
 
-  <!-- Other projects -->
   <div class="proj-grid" style="margin-top:16px;">
     <div class="proj-card fi">
       <div class="pc-ico" style="background:rgba(0,229,255,0.08);">🎫</div>
@@ -571,7 +652,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
       <div class="fs-num">03</div>
       <div class="fs-icon">🤖</div>
       <div class="fs-title" data-tr="AI Katmanı" data-en="AI Layer">AI Katmanı</div>
-      <p class="fs-desc" data-tr="Python / FastAPI ile ML entegrasyonu. scikit-learn, Apriori algoritmaları." data-en="ML integration with Python / FastAPI. scikit-learn, Apriori algorithms.">Python / FastAPI ile ML entegrasyonu. scikit-learn, Apriori algoritmaları.</p>
+      <p class="fs-desc" data-tr="Python / FastAPI ile ML entegrasyonu. scikit-learn, OpenCV, MediaPipe." data-en="ML integration with Python / FastAPI. scikit-learn, OpenCV, MediaPipe.">Python / FastAPI ile ML entegrasyonu. scikit-learn, OpenCV, MediaPipe.</p>
       <div class="fs-arrow">→</div>
     </div>
     <div class="flow-step">
@@ -598,8 +679,8 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <div class="skill-bars">
           <div class="skill-bar"><span class="sb-name">Flutter</span><div class="sb-track"><div class="sb-fill" style="width:88%;animation-delay:0.1s;"></div></div><span class="sb-pct">88%</span></div>
           <div class="skill-bar"><span class="sb-name">Dart</span><div class="sb-track"><div class="sb-fill" style="width:85%;animation-delay:0.2s;"></div></div><span class="sb-pct">85%</span></div>
-          <div class="skill-bar"><span class="sb-name">React</span><div class="sb-track"><div class="sb-fill" style="width:65%;animation-delay:0.3s;"></div></div><span class="sb-pct">65%</span></div>
-          <div class="skill-bar"><span class="sb-name">HTML/CSS</span><div class="sb-track"><div class="sb-fill" style="width:78%;animation-delay:0.4s;"></div></div><span class="sb-pct">78%</span></div>
+          <div class="skill-bar"><span class="sb-name">Kotlin</span><div class="sb-track"><div class="sb-fill" style="width:72%;animation-delay:0.3s;"></div></div><span class="sb-pct">72%</span></div>
+          <div class="skill-bar"><span class="sb-name">React</span><div class="sb-track"><div class="sb-fill" style="width:65%;animation-delay:0.4s;"></div></div><span class="sb-pct">65%</span></div>
         </div>
       </div>
       <div class="skill-group fi" style="margin-top:28px;">
@@ -616,7 +697,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
       <div class="skill-group fi">
         <div class="sg-header"><span class="sg-icon">🗄️</span><span class="sg-title" data-tr="Veritabanı & DevOps" data-en="Database & DevOps">Veritabanı & DevOps</span></div>
         <div class="skill-badges" style="margin-bottom:20px;">
-          <span class="sbadge">MongoDB</span><span class="sbadge">PostgreSQL</span><span class="sbadge">SQL</span>
+          <span class="sbadge">MongoDB</span><span class="sbadge">PostgreSQL</span><span class="sbadge">Firebase</span>
           <span class="sbadge">Hibernate</span><span class="sbadge">Docker</span><span class="sbadge">Railway</span>
           <span class="sbadge">Git</span><span class="sbadge">Linux</span><span class="sbadge">Postman</span>
         </div>
@@ -625,13 +706,13 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <div class="sg-header"><span class="sg-icon">🛡️</span><span class="sg-title" data-tr="Siber Güvenlik" data-en="Cybersecurity">Siber Güvenlik</span></div>
         <div class="skill-badges">
           <span class="sbadge">CEH</span><span class="sbadge">Malware Analysis</span><span class="sbadge">Reverse Eng.</span>
-          <span class="sbadge">Web Security</span><span class="sbadge">JWT</span><span class="sbadge">Socket.IO</span>
+          <span class="sbadge">Web Security</span><span class="sbadge">JWT</span>
         </div>
       </div>
       <div class="skill-group fi" style="margin-top:20px;">
-        <div class="sg-header"><span class="sg-icon">🤖</span><span class="sg-title" data-tr="Yapay Zeka" data-en="AI / ML">Yapay Zeka</span></div>
+        <div class="sg-header"><span class="sg-icon">🤖</span><span class="sg-title" data-tr="Yapay Zeka & Görüntü İşleme" data-en="AI & Computer Vision">Yapay Zeka & Görüntü İşleme</span></div>
         <div class="skill-badges">
-          <span class="sbadge">scikit-learn</span><span class="sbadge">ML</span><span class="sbadge">Apriori</span><span class="sbadge">FastAPI AI</span>
+          <span class="sbadge">scikit-learn</span><span class="sbadge">ML</span><span class="sbadge">OpenCV</span><span class="sbadge">MediaPipe</span>
         </div>
       </div>
     </div>
@@ -648,16 +729,16 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <span data-tr="KOD YAZAN" data-en="CODE &">KOD YAZAN</span><br>
         <span class="outline" data-tr="MÜHENDİS" data-en="ENGINEER">MÜHENDİS</span>
       </h2>
-      <p data-tr="İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim." data-en="I'm a 4th-year Computer Engineering student at Inonu University. I've developed my competency in software architecture and clean code through projects where I actively use design patterns like <strong>Factory Method, Observer, and Facade</strong>.">İnönü Üniversitesi Bilgisayar Mühendisliği 4. sınıf öğrencisiyim. <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim.</p>
-      <p data-tr="Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaşırken, Flutter ile gerçek kullanıcılara ulaşan mobil uygulamalar geliştirdim." data-en="While specializing in web security and cybersecurity through Firat Development Agency programs, I developed mobile applications that reach real users with Flutter.">Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaşırken, Flutter ile gerçek kullanıcılara ulaşan mobil uygulamalar geliştirdim.</p>
+      <p data-tr="İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum (3.50/4.00). <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim." data-en="Computer Engineering graduate from Inonu University (3.50/4.00). Developed my expertise in software architecture and clean code through projects using design patterns like <strong>Factory Method, Observer and Facade</strong>.">İnönü Üniversitesi Bilgisayar Mühendisliği mezunuyum (3.50/4.00). <strong>Factory Method, Observer ve Facade</strong> gibi tasarım kalıplarını aktif kullandığım projelerde yazılım mimarisi ve temiz kod konusundaki yetkinliğimi geliştirdim.</p>
+      <p data-tr="ATN Softtech bünyesinde TÜBİTAK projesi olan v-HIT Vision üzerinde çalıştım. Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaştım." data-en="Worked on the TÜBİTAK project v-HIT Vision at ATN Softtech. Specialized in web security and cybersecurity through Firat Development Agency programs.">ATN Softtech bünyesinde TÜBİTAK projesi olan v-HIT Vision üzerinde çalıştım. Fırat Kalkınma Ajansı destekli programlar ile web güvenliği ve siber güvenlik alanlarında uzmanlaştım.</p>
       <div class="about-highlight">
         <p data-tr="Sadece çalışan kod değil — güvenli, sürdürülebilir ve mimari açıdan sağlam yazılım üretmek istiyorum." data-en="Not just working code — I want to build software that is secure, maintainable, and architecturally sound.">"Sadece çalışan kod değil — güvenli, sürdürülebilir ve mimari açıdan sağlam yazılım üretmek istiyorum."</p>
       </div>
       <div class="ab-stats">
-        <div class="abs"><div class="abs-n">2+</div><div class="abs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
+        <div class="abs"><div class="abs-n">3+</div><div class="abs-l" data-tr="Büyük Proje" data-en="Major Projects">Büyük Proje</div></div>
         <div class="abs"><div class="abs-n">4</div><div class="abs-l" data-tr="Sertifika" data-en="Certificates">Sertifika</div></div>
-        <div class="abs"><div class="abs-n">10+</div><div class="abs-l" data-tr="Teknoloji" data-en="Technologies">Teknoloji</div></div>
-        <div class="abs"><div class="abs-n">2022</div><div class="abs-l" data-tr="Başlangıç" data-en="Since">Başlangıç</div></div>
+        <div class="abs"><div class="abs-n">3.50</div><div class="abs-l" data-tr="Mezuniyet GPA" data-en="GPA">Mezuniyet GPA</div></div>
+        <div class="abs"><div class="abs-n">2026</div><div class="abs-l" data-tr="Mezuniyet" data-en="Graduated">Mezuniyet</div></div>
       </div>
     </div>
     <div class="about-right fi">
@@ -672,7 +753,14 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <div class="ac-ico2">🎓</div>
         <div>
           <div class="ac-t2" data-tr="İnönü Üniversitesi" data-en="Inonu University">İnönü Üniversitesi</div>
-          <div class="ac-s2" data-tr="Bilgisayar Müh. · 2022–Günümüz" data-en="Computer Eng. · 2022–Present">Bilgisayar Müh. · 2022–Günümüz</div>
+          <div class="ac-s2" data-tr="Bilgisayar Müh. · 2022–2026 · 3.50 GPA" data-en="Computer Eng. · 2022–2026 · 3.50 GPA">Bilgisayar Müh. · 2022–2026 · 3.50 GPA</div>
+        </div>
+      </div>
+      <div class="about-card">
+        <div class="ac-ico2">🏢</div>
+        <div>
+          <div class="ac-t2">ATN Softtech</div>
+          <div class="ac-s2" data-tr="Staj · TÜBİTAK Projesi · 2026" data-en="Internship · TÜBİTAK Project · 2026">Staj · TÜBİTAK Projesi · 2026</div>
         </div>
       </div>
       <div class="about-card">
@@ -695,6 +783,13 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
     <span class="outline" data-tr="" data-en="CREDENTIALS"></span>
   </h2>
   <div class="certs-grid">
+    <div class="cert-item fi">
+      <div class="cert-ico" style="background:rgba(0,229,255,0.08);">🏆</div>
+      <div>
+        <div class="cert-name" data-tr="ATN Softtech Başarı Belgesi" data-en="ATN Softtech Achievement Certificate">ATN Softtech Başarı Belgesi</div>
+        <div class="cert-org" data-tr="İşletmede Mesleki Eğitim / Staj · 2026" data-en="Vocational Training / Internship · 2026">İşletmede Mesleki Eğitim / Staj · 2026</div>
+      </div>
+    </div>
     <div class="cert-item fi">
       <div class="cert-ico" style="background:rgba(255,107,53,0.1);">🔬</div>
       <div>
@@ -736,7 +831,7 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <span data-tr="KONUŞA" data-en="LET'S">KONUŞA</span><br>
         <span class="outline" data-tr="LIM MI?" data-en="TALK">LIM MI?</span>
       </div>
-      <p data-tr="Staj fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme." data-en="Always open for internship opportunities, projects, or to talk about Flutter / cybersecurity. Don't hesitate to reach out.">Staj fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme.</p>
+      <p data-tr="İş fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme." data-en="Always open for job opportunities, projects, or to talk about Flutter / cybersecurity. Don't hesitate to reach out.">İş fırsatları, projeler veya Flutter / siber güvenlik hakkında konuşmak için her zaman açığım. Mesaj atmaktan çekinme.</p>
       <div class="contact-email">
         <div class="ce-label" data-tr="E-posta" data-en="Email">E-posta</div>
         <div class="ce-addr">yusufgks03@gmail.com</div>
@@ -762,6 +857,13 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
         <div class="cl-text"><div class="cl-t">LinkedIn</div><div class="cl-s">linkedin.com/in/yusuf-göksu</div></div>
         <span class="cl-arrow">→</span>
       </a>
+      <a href="Yusuf_Goksu_CV.pdf" download class="c-link">
+        <div class="cl-icon" style="background:rgba(0,229,255,0.08);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="cl-text"><div class="cl-t" data-tr="CV İndir" data-en="Download CV">CV İndir</div><div class="cl-s" data-tr="Yusuf_Goksu_CV.pdf" data-en="Yusuf_Goksu_CV.pdf">Yusuf_Goksu_CV.pdf</div></div>
+        <span class="cl-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
@@ -769,19 +871,17 @@ footer{border-top:1px solid var(--border);padding:24px 48px;display:flex;align-i
 <footer>
   <span class="ft-left">© 2026 Yusuf Göksu</span>
   <div class="ft-logo">YG.</div>
-  <span class="ft-left" style="text-align:right;" data-tr="Bilgisayar Mühendisi · İnönü Üniversitesi" data-en="Computer Engineer · Inonu University">Bilgisayar Mühendisi · İnönü Üniversitesi</span>
+  <span class="ft-left" style="text-align:right;" data-tr="Bilgisayar Mühendisi · İnönü Üniversitesi · 2026" data-en="Computer Engineer · Inonu University · 2026">Bilgisayar Mühendisi · İnönü Üniversitesi · 2026</span>
 </footer>
 
 <script>
-/* CURSOR */
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
+const cur=document.getElementById('cursor');
+const ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
 function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}
 animRing();
 
-/* LANG */
 let lang='tr';
 function setLang(l){
   lang=l;
@@ -795,7 +895,6 @@ function setLang(l){
   });
 }
 
-/* SCROLL FADE */
 const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){setTimeout(()=>e.target.classList.add('vis'),i*80);obs.unobserve(e.target);}
@@ -803,7 +902,6 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.07});
 document.querySelectorAll('.fi').forEach(el=>obs.observe(el));
 
-/* ACTIVE NAV */
 const secs=document.querySelectorAll('section[id]');
 const navAs=document.querySelectorAll('.nav-links a[href^="#"]');
 window.addEventListener('scroll',()=>{
@@ -812,7 +910,6 @@ window.addEventListener('scroll',()=>{
   navAs.forEach(a=>a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent)':'');
 });
 
-/* HAMBURGER */
 function toggleMenu(){
   document.getElementById('burg').classList.toggle('open');
   document.getElementById('mobMenu').classList.toggle('open');
